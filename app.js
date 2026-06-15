@@ -1,4 +1,5 @@
 import express from "express"
+import router from "./src/routes/staticRoute.js";
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -19,11 +20,7 @@ app.set("views", "./src/views")
 
 
 //  Home route
-app.get("/", (req, res) => {
-  res.render("index", {
-    title: "Home"
-  });
-});
+app.use("/", router);
 
 app.listen(PORT, () => {
   console.log(`Listening on port http://127.0.0.1:${PORT}`)
