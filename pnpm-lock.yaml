@@ -26,9 +26,6 @@ importers:
       pg:
         specifier: ^8.21.0
         version: 8.21.0
-      ws:
-        specifier: ^8.21.0
-        version: 8.21.0
     devDependencies:
       add:
         specifier: ^2.0.6
@@ -36,6 +33,9 @@ importers:
       nodemon:
         specifier: ^3.1.14
         version: 3.1.14
+      ws:
+        specifier: ^8.21.0
+        version: 8.21.0
 
 packages:
 

@@ -1,5 +1,6 @@
 import express from "express";
 import router from "./src/routes/index.js";
+import addLocalVariables from "./src/middleware/global.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -18,8 +19,11 @@ app.set("view engine", "ejs");
 // Views location
 app.set("views", "./src/views");
 
+app.use(addLocalVariables);
+
 //  Home route
 app.use("/", router);
+
 
 // Global error handling middleware for 404 and other errors
 app.use((req, res, next) => {
@@ -53,6 +57,8 @@ app.use((err, req, res, next) => {
     }
   }
 });
+
+
 
 app.listen(PORT, () => {
   console.log(`Listening on port http://127.0.0.1:${PORT}`);
