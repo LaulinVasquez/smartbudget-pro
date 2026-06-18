@@ -14,6 +14,7 @@ router.get("/about", buildAbout);
 router.get("/login", buildLogin);
 router.get("/register", buildRegister);
 
+// This a test
 router.get("/errors21", testErrorPage);
 
 export default router;
