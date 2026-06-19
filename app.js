@@ -42,7 +42,7 @@ app.use((err, req, res, next) => {
   const message = status === 404 ? "404" : 500;
   const context = {
     title: status === 404 ? "404 - Page Not Found" : "Internal Server Error",
-    error: NODE_ENV === "production" ? "An error occured" : err.message, // Show error details only in development environment
+    error: NODE_ENV === "production" ? "An error occurred" : err.message, // Show error details only in development environment
     stack: NODE_ENV === "production" ? null : err.stack,
     NODE_ENV, // Our Websocket check needs this and it's convenient to pass along
   };
