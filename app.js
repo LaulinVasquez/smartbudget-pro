@@ -1,23 +1,24 @@
 import express from "express";
 import router from "./src/routes/index.js";
 import addLocalVariables from "./src/middleware/global.js";
+import path from "path";
+import {fileURLToPath} from "url";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const NODE_ENV = process.env.NODE_ENV?.toLocaleLowerCase() || "production";
+const PORT = process.env.PORT || 3000;
 
 // Middleware (setting up parse url-encoded allows Express to receive and process POST data)
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // static assets
-app.use(express.static("src/public"));
-
-// View engine
+app.use(express.static(path.join(__dirname,"src/public"))) // Loading css
 app.set("view engine", "ejs");
-
-// Views location
-app.set("views", "./src/views");
+app.set("views", path.join(__dirname, "src/views"));
 
 app.use(addLocalVariables);
 
