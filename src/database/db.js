@@ -51,7 +51,10 @@ if (NODE_ENV.includes("dev") && ENABLE_SQL_LOGGING){
     }
   };
 }else {
-    db = pool;
+    db = {
+        query: pool.query.bind(pool),
+        close: pool.end.bind(pool)
+    };
 }
 export default db;
 export {caCert};

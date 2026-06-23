@@ -3,7 +3,7 @@ import router from "./src/routes/index.js";
 import addLocalVariables from "./src/middleware/global.js";
 import path from "path";
 import {fileURLToPath} from "url";
-import {setupDatabase} from "./src/database/setup.js"
+import setupDatabase from "./src/database/setup.js"
 
 const app = express();
 
