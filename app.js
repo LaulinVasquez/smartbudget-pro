@@ -3,6 +3,7 @@ import router from "./src/routes/index.js";
 import addLocalVariables from "./src/middleware/global.js";
 import path from "path";
 import {fileURLToPath} from "url";
+import {setupDatabase} from "./src/database/setup.js"
 
 const app = express();
 
@@ -62,5 +63,6 @@ app.use((err, req, res, next) => {
 
 
 app.listen(PORT, () => {
+  setupDatabase();
   console.log(`Listening on port http://127.0.0.1:${PORT}`);
 });
