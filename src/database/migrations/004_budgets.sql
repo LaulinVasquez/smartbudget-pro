@@ -1,0 +1,14 @@
+CREATE TABLE IF NOT EXISTS budgets (
+    budget_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    category_id INTEGER NOT NULL,
+    month INTEGER NOT NULL CHECK (month BETWEEN 1 AND 12),
+    year INTEGER NOT NULL,
+    amount NUMERIC(10,2) NOT NULL CHECK (amount > 0),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_budget_user FOREIGN KEY (user_id) REFERENCES users(user_id)
+        ON DELETE CASCADE,
+    CONSTRAINT fk_budget_category FOREIGN KEY (category_id) REFERENCES categories(category_id)
+        ON DELETE CASCADE
+);
