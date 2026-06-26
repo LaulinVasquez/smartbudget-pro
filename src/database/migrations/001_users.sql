@@ -4,10 +4,7 @@ CREATE TABLE IF NOT EXISTS users (
     last_name VARCHAR(75) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    role VARCHAR(20) NOT NULL
-        CHECK (role IN ('user', 'advisor', 'admin')),
-    created_at TIMESTAMPTZ NOT NULL
-        DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMPTZ NOT NULL
-        DEFAULT CURRENT_TIMESTAMP
+    role VARCHAR(20) NOT NULL CHECK (role IN ('user', 'advisor', 'admin')),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
