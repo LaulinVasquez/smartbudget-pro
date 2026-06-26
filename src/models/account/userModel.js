@@ -90,4 +90,4 @@ async function getAllUsers() {
   return rows;
 }
 
-export { emailExists, createUser, getUserByEmail, getUserById };
+export { createUser, emailExists, getUserById, getUserByEmail, getAllUsers };
