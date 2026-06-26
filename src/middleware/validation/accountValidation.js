@@ -1,7 +1,7 @@
 import { body } from "express-validator";
 
-const accountValidation = {
-  registration: [
+
+  const registration = [
     body("firstName")
       .trim()
       .notEmpty()
@@ -57,10 +57,11 @@ const accountValidation = {
       .withMessage("Please confirm your password.")
       .custom((value, { req }) => value === req.body.password)
       .withMessage("Password must match."),
-  ],
+  ];
+
  //   Will be added soon
-  login: [],
-  updateProfile: [],
-  changePassword: []
-};
-export default accountValidation;
+  login = [],
+  updateProfile = [];
+  changePassword = [];
+  
+export default {registration, login, updateProfile, changePassword};
