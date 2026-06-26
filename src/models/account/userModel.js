@@ -1,8 +1,29 @@
 import db from "../../database/db.js";
 
 /**
- * Check if email already exists
+ * Create new user
+ * @param {Object} user
+ * @return {Promise<Object>}
+ *  CREATE
  */
+
+async function createUser(user) {
+  const { firstName, lastName, email, password, role = "user" } = user;
+
+  const sql = `
+    INSERT INTO users ( first_name, last_name, email, password, role)
+    VALUES ($1,$2,$3,$4,$5)
+    RETURNING user_id, first_name, last_name, email, role, created_at
+  `;
+
+  const { rows } = await db.query(sql, [ firstName, lastName, email, password, role, ]);
+
+  return rows[0];
+}
+
+//   READ
+
+//   Check if email already exists
 async function emailExists(email) {
   const sql = `
     SELECT EXISTS(
@@ -12,63 +33,9 @@ async function emailExists(email) {
     ) AS exists
   `;
 
-  const result = await db.query(sql, [email]);
+  const { rows } = await db.query(sql, [email]);
 
-  return result.rows[0].exists;
-}
-
-/**
- * Create new user
- */
-async function createUser(
-  firstName,
-  lastName,
-  email,
-  hashedPassword,
-  role = "user",
-) {
-  const sql = `
-    INSERT INTO users (
-      first_name,
-      last_name,
-      email,
-      password,
-      role
-    )
-    VALUES ($1,$2,$3,$4,$5)
-    RETURNING
-      user_id,
-      first_name,
-      last_name,
-      email,
-      role,
-      created_at
-  `;
-
-  const result = await db.query(sql, [
-    firstName,
-    lastName,
-    email,
-    hashedPassword,
-    role,
-  ]);
-
-  return result.rows[0];
-}
-
-/**
- * Find user by email
- */
-async function getUserByEmail(email) {
-  const sql = `
-    SELECT *
-    FROM users
-    WHERE email = $1
-  `;
-
-  const result = await db.query(sql, [email]);
-
-  return result.rows[0];
+  return rows[0].exists;
 }
 
 /**
@@ -87,9 +54,40 @@ async function getUserById(userId) {
     WHERE user_id = $1
   `;
 
-  const result = await db.query(sql, [userId]);
+  const { rows } = await db.query(sql, [userId]);
 
-  return result.rows[0];
+  return rows[0] ?? null;
+}
+
+/**
+ * Get a user by email / used during login.
+ */
+async function getUserByEmail(email) {
+  const sql = `
+    SELECT *
+    FROM users
+    WHERE email = $1;
+  `;
+
+  const { rows } = await db.query(sql, [email]);
+  return rows[0] ?? null;
+}
+
+/**
+ * Retrieve all users.
+ *
+ * @returns {Promise<Array>}
+ */
+async function getAllUsers() {
+  const sql = `
+    SELECT user_id, first_name, last_name, email, role, created_at
+    FROM users
+    ORDER BY created_at DESC;
+  `;
+
+  const { rows } = await db.query(sql);
+
+  return rows;
 }
 
 export { emailExists, createUser, getUserByEmail, getUserById };
