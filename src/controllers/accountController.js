@@ -11,14 +11,24 @@ export function buildRegister(req, res) {
 export const registerUser = async (req, res, next) => {
   try {
     const { firstName, lastName, email, password } = req.body;
- 
-   if (req.body.email !== awaitemailExists(req.body.email)) {
-    createUser(req.body);
-   }else {
-    console.log("User already exist!")
-   }
-} 
-  catch (error) {
+
+    const exists = await emailExists(email);
+    if (email) {
+      console.log("User already registered"); // Will be change for a flash Message
+      return res.render("account/login", {title: "Login"});
+
+    } else {
+      const hashedPassword = await bcrypt.hash(password, 12);
+      await createUser({
+        firstName,
+        lastName,
+        email,
+        password: hashedPassword,
+      });
+
+      return res.render("account/login", { title: "Login" });
+    }
+  } catch (error) {
     next(error);
   }
 };
