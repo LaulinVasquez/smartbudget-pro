@@ -14,6 +14,7 @@ router.get("/about", buildAbout);
 // Account routes
 router.get("/login", buildLogin);
 router.get("/register", buildRegister);
+router.use("/", accountRoutes);
 
 // This a test
 router.get("/errors21", testErrorPage);

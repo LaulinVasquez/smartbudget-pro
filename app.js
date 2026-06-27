@@ -23,6 +23,7 @@ app.set("views", path.join(__dirname, "src/views"));
 
 app.use(addLocalVariables);
 
+app.use(express.urlencoded({ extended: true }));
 //  Home route
 app.use("/", router);
 
