@@ -10,9 +10,7 @@ const ENABLE_SQL_LOGGING = process.env.ENABLE_SQL_LOGGING === "true";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const caCert = fs.readFileSync(
-  path.join(__dirname, "../../bin", "byuicse-psql-cert.pem"),
-);
+const caCert = process.env.DB_SSL_CA?.replace(/\\n/g, "\n");
 
 const pool = new Pool({
   connectionString: process.env.DB_URL,
