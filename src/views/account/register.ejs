@@ -1,14 +1,103 @@
 <%- include("../partials/header") %>
-
 <%- include("../partials/nav") %>
 
-<main>
+<main class="container">
 
-    <h2>Create Account</h2>
+    <h1>Create Account</h1>
+<% if (errors.length > 0) { %>
 
-    <p>
-        Registration functionality will be implemented in Sprint 3.
-    </p>
+<div class="validation-errors">
+
+    <ul>
+
+    <% errors.forEach(error => { %>
+
+        <li><%= error.msg %></li>
+
+    <% }) %>
+
+    </ul>
+
+</div>
+
+<% } %>
+    <form action="/register" method="POST" novalidate>
+
+        <div>
+            <label for="firstName">First Name</label>
+
+            <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                value="<%= formData.firstName || '' %>"
+                required
+            >
+        </div>
+
+        <div>
+            <label for="lastName">Last Name</label>
+
+            <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                value="<%= formData.lastName || '' %>"
+                required
+            >
+        </div>
+
+        <div>
+            <label for="email">Email</label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                value="<%= formData.email || '' %>"
+                required
+            >
+        </div>
+
+        <div>
+            <label for="emailConfirm">Confirm Email</label>
+
+            <input
+                type="email"
+                id="emailConfirm"
+                name="emailConfirm"
+                value="<%= formData.emailConfirm || '' %>"
+                required
+            >
+        </div>
+
+        <div>
+            <label for="password">Password</label>
+
+            <input
+                type="password"
+                id="password"
+                name="password"
+                required
+            >
+        </div>
+
+        <div>
+            <label for="passwordConfirm">Confirm Password</label>
+
+            <input
+                type="password"
+                id="passwordConfirm"
+                name="passwordConfirm"
+                required
+            >
+        </div>
+
+        <button type="submit">
+            Create Account
+        </button>
+
+    </form>
 
 </main>
 

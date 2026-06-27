@@ -59,9 +59,9 @@ import { body } from "express-validator";
       .withMessage("Password must match."),
   ];
 
- //   Will be added soon
-  login = [],
-  updateProfile = [];
-  changePassword = [];
-  
+ //   Will be added soon (REST API will be implemented with this for PUT/PATCH and DELETE)
+ const login = [];
+ const updateProfile = [];
+ const changePassword = [];
+
 export default {registration, login, updateProfile, changePassword};

@@ -13,21 +13,22 @@ export const registerUser = async (req, res, next) => {
     const { firstName, lastName, email, password } = req.body;
 
     const exists = await emailExists(email);
-    if (email) {
+    if (exists) {
       console.log("User already registered"); // Will be change for a flash Message
-      return res.render("account/login", {title: "Login"});
+      return res.redirect("/register");
 
-    } else {
+    }
       const hashedPassword = await bcrypt.hash(password, 12);
       await createUser({
         firstName,
         lastName,
         email,
         password: hashedPassword,
+        role: "user",
       });
 
-      return res.render("account/login", { title: "Login" });
-    }
+      return res.redirect("/login");
+
   } catch (error) {
     next(error);
   }
