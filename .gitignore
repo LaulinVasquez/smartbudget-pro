@@ -128,6 +128,14 @@ dist
 # pnpm
 .pnpm-store
 
+# SSL certificates
+bin/*.pem
+*.pem
+*.crt
+*.key
+certs/
+ssl/
+
 # yarn v3
 .pnp.*
 .yarn/*
