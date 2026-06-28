@@ -12,8 +12,6 @@ router.get("/", buildHome); // handles the GET|| POST from account.js it will de
 router.get("/about", buildAbout);
 
 // Account routes
-router.get("/login", buildLogin);
-router.get("/register", buildRegister);
 router.use("/", accountRoutes);
 
 // This a test

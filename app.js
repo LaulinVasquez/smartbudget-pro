@@ -1,9 +1,11 @@
+import session from "express-session";
 import express from "express";
 import router from "./src/routes/index.js";
 import addLocalVariables from "./src/middleware/global.js";
 import path from "path";
 import {fileURLToPath} from "url";
 import setupDatabase from "./src/database/setup.js"
+import flash from "./src/middleware/flash.js";
 
 const app = express();
 
