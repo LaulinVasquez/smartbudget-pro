@@ -14,7 +14,7 @@ export const registerUser = async (req, res, next) => {
 
     const exists = await emailExists(email);
     if (exists) {
-      console.log("User already registered"); // Will be change for a flash Message
+      req.flash("error", "Invalid email or password"); // Will be change for a flash Message
       return res.redirect("/register");
 
     }
@@ -26,7 +26,7 @@ export const registerUser = async (req, res, next) => {
         password: hashedPassword,
         role: "user",
       });
-
+      req.flash("success", "User succesfully registered")
       return res.redirect("/login");
 
   } catch (error) {

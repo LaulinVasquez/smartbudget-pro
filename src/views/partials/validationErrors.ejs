@@ -1,9 +1,15 @@
-<% if (errors && errors.length > 0) { %>
-<div class="validation-errors">
-    <ul>
-        <% errors.forEach(error => { %>
-            <li><%= error.msg %></li>
-        <% }) %>
-    </ul>
-</div>
+<% 
+    const messages = flash();
+    const hasMessages = Object.values(messages).some(arr => arr.length > 0);
+%>
+<% if (hasMessages) { %>
+    <div class="flash-messages">
+        <% Object.keys(messages).forEach(type => { %>
+            <% messages[type].forEach(message => { %>
+                <div class="flash <%= type %>">
+                    <%= message %>
+                </div>
+            <% }); %>
+        <% }); %>
+    </div>
 <% } %>
