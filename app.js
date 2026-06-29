@@ -8,9 +8,8 @@ import path from "path";
 import {fileURLToPath} from "url";
 import setupDatabase from "./src/database/setup.js"
 import flash from "./src/middleware/flash.js";
+import { caCert } from "./src/database/db.js";
 
-const app = express();
-const pgSession = connectPgSimple(session);
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -18,9 +17,8 @@ const __dirname = path.dirname(__filename);
 const NODE_ENV = process.env.NODE_ENV?.toLocaleLowerCase() || "production";
 const PORT = process.env.PORT || 3000;
 
-// Middleware (setting up parse url-encoded allows Express to receive and process POST data)
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+const app = express();
+const pgSession = connectPgSimple(session);
 
 // Configure session middleware
 app.use(
@@ -28,9 +26,9 @@ app.use(
     store: new pgSession({
       conObject: {
         connectionString: process.env.DB_URL,
-        // Configure SSL for session store connection (required by BYU-I databases)
+        
         ssl: {
-          ca: process.env.DB_SSL_CA,
+          ca: caCert,
           rejectUnauthorized: true,
           checkServerIdentity: () => {
             return undefined;
@@ -60,10 +58,12 @@ app.use(addLocalVariables);
 app.use(flash);
 startSessionCleanup();
 
+// Middleware (setting up parse url-encoded allows Express to receive and process POST data)
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 //  Home route
 app.use("/", router);
-
 
 // Global error handling middleware for 404 and other errors
 app.use((req, res, next) => {
