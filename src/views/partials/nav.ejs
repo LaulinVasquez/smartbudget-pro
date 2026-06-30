@@ -11,20 +11,35 @@
     <hr>
 </header>
 
-<% 
-    const messages = typeof flash === "function" 
-    ? flash() 
-    : { success: [], error: [], warning: [], info: [] };
-    const hasMessages = Object.values(messages).some(arr => arr.length > 0);
+<%
+const messages = flashMessages || {
+    success: [],
+    error: [],
+    warning: [],
+    info: [],
+};
+
+const hasMessages = Object.values(messages).some(
+    list => list.length > 0
+);
 %>
+
 <% if (hasMessages) { %>
-    <div class="flash-messages">
-        <% Object.keys(messages).forEach(type => { %>
-            <% messages[type].forEach(message => { %>
-                <div class="flash <%= type %>">
-                    <%= message %>
-                </div>
-            <% }); %>
-        <% }); %>
-    </div>
+
+<div class="flash-messages">
+
+    <% Object.entries(flashMessages).forEach(([type, messages]) => { %>
+
+        <% messages.forEach(message => { %>
+
+            <div class="flash <%= type %>">
+                <%= message %>
+            </div>
+
+        <% }) %>
+
+    <% }) %>
+
+</div>
+
 <% } %>

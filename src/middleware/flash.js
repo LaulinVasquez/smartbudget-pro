@@ -103,8 +103,8 @@ const flashMiddleware = (req, res, next) => {
 const flashLocals = (req, res, next) => {
   // Attach the flash function to res.locals so templates can access it
   // The function is NOT called here, just made available
-  // Messages are only consumed when a template calls flash()
-  res.locals.flash = req.flash;
+  // Consume the flash messages once per request
+  res.locals.flashMessages = req.flash();
   next();
 };
 
