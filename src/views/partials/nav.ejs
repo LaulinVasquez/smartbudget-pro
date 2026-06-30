@@ -12,7 +12,9 @@
 </header>
 
 <% 
-    const messages = flash();
+    const messages = typeof flash === "function" 
+    ? flash() 
+    : { success: [], error: [], warning: [], info: [] };
     const hasMessages = Object.values(messages).some(arr => arr.length > 0);
 %>
 <% if (hasMessages) { %>

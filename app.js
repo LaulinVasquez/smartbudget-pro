@@ -1,15 +1,15 @@
 import session from "express-session";
 import {startSessionCleanup} from "./src/utilities/session-cleanup.js";
 import connectPgSimple from "connect-pg-simple";
+import { caCert } from "./src/database/db.js";
 import express from "express";
-import router from "./src/routes/index.js";
-import addLocalVariables from "./src/middleware/global.js";
 import path from "path";
 import {fileURLToPath} from "url";
-import setupDatabase from "./src/database/setup.js"
+import setupDatabase from "./src/database/setup.js";
 import flash from "./src/middleware/flash.js";
-import { caCert } from "./src/database/db.js";
 
+import router from "./src/routes/index.js";
+import addLocalVariables from "./src/middleware/global.js";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -54,16 +54,17 @@ app.use(express.static(path.join(__dirname,"src/public"))) // Loading css
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "src/views"));
 
-app.use(addLocalVariables);
-app.use(flash);
-startSessionCleanup();
-
 // Middleware (setting up parse url-encoded allows Express to receive and process POST data)
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use(addLocalVariables);
+app.use(flash);
+
 //  Home route
 app.use("/", router);
+
+startSessionCleanup();
 
 // Global error handling middleware for 404 and other errors
 app.use((req, res, next) => {
