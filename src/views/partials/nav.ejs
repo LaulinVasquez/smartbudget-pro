@@ -12,15 +12,18 @@
 </header>
 
 <%
-const messages = flashMessages || {
-    success: [],
-    error: [],
-    warning: [],
-    info: [],
-};
+const messages =
+  typeof flashMessages !== "undefined"
+    ? flashMessages
+    : {
+        success: [],
+        error: [],
+        warning: [],
+        info: [],
+      };
 
 const hasMessages = Object.values(messages).some(
-    list => list.length > 0
+  list => list.length > 0
 );
 %>
 
