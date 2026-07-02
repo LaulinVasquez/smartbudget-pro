@@ -1,7 +1,7 @@
 import { getUserByEmail, emailExists } from "./userModel.js";
 // This is just for test purposes
 const user = await getUserByEmail(
-  "user@smartbudgetpro.com"
+  "advisor@smartbudgetpro.com"
 );
 
 console.log(user);
