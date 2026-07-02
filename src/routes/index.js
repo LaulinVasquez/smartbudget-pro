@@ -1,6 +1,7 @@
 import {Router} from "express";
 import { buildHome,buildAbout, testErrorPage } from "../controllers/baseController.js";
-import accountRoutes from "./account.js"
+import accountRoutes from "./account.js";
+import dashboardRoutes from "./dashboard.js"
 
 // Create a new router instance
 const router = Router()
@@ -13,6 +14,8 @@ router.get("/about", buildAbout);
 // Account routes
 router.use("/", accountRoutes);
 
+// Dashboard routes
+router.use("/", dashboardRoutes);
 // This a test
 router.get("/errors21", testErrorPage);
 

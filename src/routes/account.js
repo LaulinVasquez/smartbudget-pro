@@ -1,7 +1,7 @@
 import { Router } from "express";
 import accountValidation from "../middleware/validation/accountValidation.js";
 import validate from "../middleware/validation/validate.js";
-import { buildRegister, registerUser, buildLogin, loginUser, logoutUser } from "../controllers/accountController.js";
+import { buildRegister, registerUser, buildLogin, loginUser, logoutUser } from "../controllers/account/accountController.js";
 
 // This where the app becomes restful
 

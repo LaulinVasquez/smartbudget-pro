@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { emailExists, createUser, getUserByEmail } from "../models/account/userModel.js";
+import { emailExists, createUser, getUserByEmail } from "../../models/account/userModel.js";
 
 export function buildRegister(req, res) {
   res.render("account/register", {
