@@ -15,13 +15,7 @@
 const messages =
   typeof flashMessages !== "undefined"
     ? flashMessages
-    : {
-        success: [],
-        error: [],
-        warning: [],
-        info: [],
-      };
-
+    : { success: [], error: [], warning: [], info: [],};
 const hasMessages = Object.values(messages).some(
   list => list.length > 0
 );

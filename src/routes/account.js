@@ -9,7 +9,7 @@ router.get("/register", buildRegister);
 //  POST /register - Handler registration form submission with validation
 router.post("/register",
     accountValidation.registration,
-    validate,
+    validate("/register"),
     registerUser
 );
 

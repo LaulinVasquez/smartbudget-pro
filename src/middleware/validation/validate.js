@@ -1,18 +1,19 @@
 // This will validate rather than having the controllers doing it
-import { validationResult} from "express-validator";
+import { validationResult } from "express-validator";
 
-const validate = (req,res, next) => {
+const validate = (redirectPath) => {
+  return (req, res, next) => {
     const errors = validationResult(req);
-
+    
     if (errors.isEmpty()) {
         return next();
     }
 
-    return res.status(400).render("account/register", {
-        title: "Register",
-        errors: errors.array(),
-        formData: req.body,
+    errors.array().forEach((error) => {
+        req.flash("error", error.msg)
     });
+    return res.redirect(redirectPath);
+  };
 };
 
 export default validate;

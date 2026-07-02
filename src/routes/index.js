@@ -1,6 +1,5 @@
 import {Router} from "express";
 import { buildHome,buildAbout, testErrorPage } from "../controllers/baseController.js";
-import { buildLogin, buildRegister } from "../controllers/accountController.js";
 import accountRoutes from "./account.js"
 
 // Create a new router instance
