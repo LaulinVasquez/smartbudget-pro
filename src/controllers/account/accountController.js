@@ -87,7 +87,7 @@ export const logoutUser = (req, res, next) => {
     if (error) {
       return next(error);
     }
-    res.ClearCookie("connect.sid");
+    res.clearCookie("connect.sid");
     return res.redirect("/")
   });
 };
