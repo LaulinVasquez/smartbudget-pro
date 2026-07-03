@@ -101,10 +101,23 @@ const flashMiddleware = (req, res, next) => {
  * This middleware must run AFTER flashMiddleware
  */
 const flashLocals = (req, res, next) => {
-  // Attach the flash function to res.locals so templates can access it
-  // The function is NOT called here, just made available
-  // Consume the flash messages once per request
-  res.locals.flashMessages = req.flash();
+  const emptyMessages = {
+    success: [],
+    error: [],
+    warning: [],
+    info: [],
+  };
+
+  if (req.method === "GET") {
+    res.locals.flashMessages = req.session?.flash || emptyMessages;
+
+    if (req.session) {
+      req.session.flash = emptyMessages;
+    }
+  } else {
+    res.locals.flashMessages = emptyMessages;
+  }
+
   next();
 };
 

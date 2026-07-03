@@ -4,8 +4,17 @@
     <nav>
         <a href="/">Home</a>
         <a href="/about">About</a>
-        <a href="/login">Login</a>
-        <a href="/register">Register</a>
+
+        <% if (isLoggedIn) { %>
+            <a href="/dashboard">Dashboard</a>
+
+            <form action="/logout" method="POST" style="display:inline;">
+                <button type="submit">Logout</button>
+            </form>
+        <% } else { %>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        <% } %>
     </nav>
 
     <hr>
@@ -13,21 +22,26 @@
 
 <%
 const messages =
-  typeof flashMessages !== "undefined"
-    ? flashMessages
-    : { success: [], error: [], warning: [], info: [],};
+    typeof flashMessages !== "undefined"
+        ? flashMessages
+        : {
+            success: [],
+            error: [],
+            warning: [],
+            info: [],
+        };
+
 const hasMessages = Object.values(messages).some(
-  list => list.length > 0
+    list => list.length > 0
 );
 %>
 
 <% if (hasMessages) { %>
-
 <div class="flash-messages">
 
-    <% Object.entries(flashMessages).forEach(([type, messages]) => { %>
+    <% Object.entries(messages).forEach(([type, list]) => { %>
 
-        <% messages.forEach(message => { %>
+        <% list.forEach(message => { %>
 
             <div class="flash <%= type %>">
                 <%= message %>
@@ -38,5 +52,4 @@ const hasMessages = Object.values(messages).some(
     <% }) %>
 
 </div>
-
 <% } %>

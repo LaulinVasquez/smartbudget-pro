@@ -1,6 +1,7 @@
 function requireLogin(req, res, next) {
     if (!req.session || !req.session.user) {
         req.flash("error", "Please log in to continue.");
+        console.log("please log in");
         return res.redirect("/login");
     }
     next();
@@ -10,6 +11,7 @@ function requireRole(...allowedRoles) {
     return (req, res, next) => {
         if (!req.session || !req.session.user) {
             req.flash("error", "Please log in to continue.");
+            console.log("needs a role")
             return res.redirect("/login");
         }
         if (!allowedRoles.includes(req.session.user.role)) {
