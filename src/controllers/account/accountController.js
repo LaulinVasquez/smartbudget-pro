@@ -29,7 +29,7 @@ export const registerUser = async (req, res, next) => {
         role: "user",
       });
       req.flash("success", "User succesfully registered.")
-      console.log("SESSION FLASH AFTER SET:", req.session.flash);
+
       return res.redirect("/login");
 
   } catch (error) {
@@ -38,8 +38,6 @@ export const registerUser = async (req, res, next) => {
 };
 
 export function buildLogin(req, res) {
-  console.log("LOGIN PAGE FLASH:", res.locals.flashMessages);
-
   res.render("account/login", {
     title: "Login",
   });
