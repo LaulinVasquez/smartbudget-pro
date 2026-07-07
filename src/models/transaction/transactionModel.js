@@ -82,7 +82,7 @@ async function updateTransaction(transactionId, userId, transactionData) {
             updated_at;
         `;
 
-    const  { rows } = await db.query(sql, [catgoryId, amount, transactionType, description, transactionDate, transactionId, userId]);
+    const  { rows } = await db.query(sql, [categoryId, amount, transactionType, description, transactionDate, transactionId, userId]);
     return rows[0] ?? null;
 }
 

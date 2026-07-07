@@ -2,41 +2,41 @@ import { Router } from "express";
 
 import { requireLogin, requireRole } from "../middleware/auth/auth.js";
 import { create, update } from "../middleware/validation/transactionValidation.js";  
-import {validate} from "../middleware/validation/validate.js";
+import validate from "../middleware/validation/validate.js";
 import {buildTransactions, addTransaction, buildEditTransaction, editTransaction, removeTransaction } from "../controllers/transaction/transactionController.js";
 
 const router = Router();
 
-router.get("/transactions",
+router.get("/transaction",
     requireLogin,
     requireRole("user"),
     buildTransactions
 );
 
-router.post("/transactions",
+router.post("/transaction",
     requireLogin,
     requireRole("user"),
     create,
-    validate("/transactions"),
+    validate("/transaction"),
     addTransaction
 );
 // GET data that is going to be updated
-router.get("/transactions/:transactionId/edit",
+router.get("/transaction/:transactionId/edit",
     requireLogin,
     requireRole("user"),
     buildEditTransaction
 );
 
 // POST add the new transaction update
-router.post("/transactions/:transactionId/edit",
+router.post("/transaction/:transactionId/edit",
     requireLogin,
     requireRole("user"),
     update,
-    validate("/transactions"),
+    validate("/transaction"),
     editTransaction
 );
 
-router.post("/transactions/:transactionId/delete",
+router.post("/transaction/:transactionId/delete",
     requireLogin,
     requireRole("user"),
     removeTransaction

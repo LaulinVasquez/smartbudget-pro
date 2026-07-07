@@ -25,7 +25,7 @@ const create = [
         .isLength({ max: 255})
         .withMessage("Description cannot exceed 255 characters."),
 
-    body("TransactionDate")
+    body("transactionDate")
         .notEmpty()
         .withMessage("Transaction Date is required.")
         .isISO8601()

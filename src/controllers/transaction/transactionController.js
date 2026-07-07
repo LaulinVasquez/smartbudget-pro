@@ -31,7 +31,7 @@ async function addTransaction(req, res, next) {
             transactionDate: req.body.transactionDate,
         });
         req.flash("success", "Transaction added successfully.");
-        return res.redirect("/transactions");
+        return res.redirect("/transaction");
     } catch (error) {
         next(error);
     }
@@ -46,7 +46,7 @@ async function buildEditTransaction(req, res, next) {
 
         if (!transaction) {
             req.flash("error", "Transaction not found.");
-            return res.redirect("/transactions");
+            return res.redirect("/transaction");
         }
         res.render("transaction/edit", {
             title: "Edit Transaction",
@@ -76,11 +76,11 @@ async function editTransaction(req, res, next) {
         );
         if (!updatedTransaction) {
             req.flash("error", "Transaction not found.");
-            return res.redirect("/transactions");
+            return res.redirect("/transaction");
         }
 
         req.flash("success", "Transaction updated successfully.");
-        return res.redirect("/transactions");
+        return res.redirect("/transaction");
     } catch (error) {
         next(error);
     }
@@ -88,17 +88,17 @@ async function editTransaction(req, res, next) {
 
 async function removeTransaction(req, res, next) {
     try {
-        const userId = req.session.userId;
-        const transactionId = req.paramas.transactionId;
+        const userId = req.session.user.userId;
+        const transactionId = req.params.transactionId;
 
         const transactionDeleted = await deleteTransaction(transactionId, userId);
 
         if (!transactionDeleted) {
             req.flash("error", "Transaction not found.");
-            res.redirect("/transactions");
+            return res.redirect("/transaction");
         }
         req.flash("success", "Transaction deleted successfully.");
-        res.redirect("/transactions");
+        return res.redirect("/transaction");
     } catch (error) {
         next(error);
     }
