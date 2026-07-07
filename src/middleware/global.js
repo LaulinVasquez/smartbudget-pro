@@ -33,7 +33,6 @@ const setHeadAssetsFunctionality = (res) => {
 // This is where we add all local variables that we want to make available in all templates
 const addLocalVariables = (req, res, next) => {
   setHeadAssetsFunctionality(res);
-  // res.addScripts('<script src="/js/flash.js" defer></script>', 10);
   res.addStyles('<link rel="stylesheet" href="/css/styles.css">', 10);
 
   // Logged-in state
