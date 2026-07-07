@@ -18,6 +18,9 @@ const NODE_ENV = process.env.NODE_ENV?.toLocaleLowerCase() || "production";
 const PORT = process.env.PORT || 3000;
 
 const app = express();
+if (NODE_ENV === "production") {
+  app.set("trust proxy", 1);
+}
 const pgSession = connectPgSimple(session);
 
 // Configure session middleware
