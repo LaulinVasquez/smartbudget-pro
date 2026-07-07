@@ -1,9 +1,11 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const container = document.querySelector(".flash-messages");
+// document.addEventListener("DOMContentLoaded", () => {
+//     const container = document.querySelector(".flash-messages");
 
-    if (!container) return;
+//     if (!container) return;
 
-    setTimeout(() => {
-        container.remove();
-    }, 5000);
-});
+//     setTimeout(() => {
+//         container.remove();
+//     }, 5000);
+// });
+
+console.log("loaded")
