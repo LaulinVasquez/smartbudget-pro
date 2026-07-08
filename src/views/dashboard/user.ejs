@@ -1,68 +1,75 @@
 <%- include("../partials/header") %>
-<%- include("../partials/nav") %>
 
-<main>
-  <h1>Welcome back, <%= user.firstName %></h1>
+<div class="app">
+    <%- include("../partials/appSidebar") %>
 
-  <section>
-    <article>
-      <h2>Current Balance</h2>
-      <p>$<%= Number(summary.current_balance).toFixed(2) %></p>
-    </article>
+    <div class="app-main">
+        <%- include("../partials/topbar", { pageTitle: "Dashboard" }) %>
 
-    <article>
-      <h2>Total Income</h2>
-      <p>$<%= Number(summary.total_income).toFixed(2) %></p>
-    </article>
+        <main class="content">
+            <section>
+                <h2>Financial Overview</h2>
 
-    <article>
-      <h2>Total Expenses</h2>
-      <p>$<%= Number(summary.total_expenses).toFixed(2) %></p>
-    </article>
-  </section>
+                <div class="stat-grid">
+                    <article class="stat-card">
+                        <p>Current Balance</p>
+                        <strong>$<%= Number(summary.current_balance).toFixed(2) %></strong>
+                    </article>
 
-  <section>
-    <h2>Recent Transactions</h2>
+                    <article class="stat-card">
+                        <p>Total Income</p>
+                        <strong>$<%= Number(summary.total_income).toFixed(2) %></strong>
+                    </article>
 
-    <% if (transactions.length === 0) { %>
-      <p>No transactions yet.</p>
-      <a href="/transaction">Add your first transaction</a>
-    <% } else { %>
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Category</th>
-            <th>Description</th>
-            <th>Type</th>
-            <th>Amount</th>
-          </tr>
-        </thead>
+                    <article class="stat-card">
+                        <p>Total Expenses</p>
+                        <strong>$<%= Number(summary.total_expenses).toFixed(2) %></strong>
+                    </article>
+                </div>
+            </section>
 
-        <tbody>
-          <% transactions.forEach(transaction => { %>
-            <tr>
-              <td><%= transaction.transaction_date.toISOString().slice(0, 10) %></td>
-              <td><%= transaction.category_name || "Uncategorized" %></td>
-              <td><%= transaction.description || "-" %></td>
-              <td><%= transaction.transaction_type %></td>
-              <td>
-                <% if (transaction.transaction_type === "income") { %>
-                  +$<%= Number(transaction.amount).toFixed(2) %>
+            <section class="card">
+                <h2>Recent Transactions</h2>
+
+                <% if (transactions.length === 0) { %>
+                    <p>No transactions yet.</p>
+                    <a class="btn btn-primary" href="/transaction">
+                        Add your first transaction
+                    </a>
                 <% } else { %>
-                  -$<%= Number(transaction.amount).toFixed(2) %>
-                <% } %>
-              </td>
-            </tr>
-          <% }) %>
-        </tbody>
-      </table>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Category</th>
+                                <th>Description</th>
+                                <th>Type</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
 
-      <p>
-        <a href="/transaction">View all transactions</a>
-      </p>
-    <% } %>
-  </section>
-</main>
+                        <tbody>
+                            <% transactions.forEach(transaction => { %>
+                                <tr>
+                                    <td><%= transaction.transaction_date.toISOString().slice(0, 10) %></td>
+                                    <td><%= transaction.category_name || "Uncategorized" %></td>
+                                    <td><%= transaction.description || "-" %></td>
+                                    <td><%= transaction.transaction_type %></td>
+                                    <td>
+                                        <% if (transaction.transaction_type === "income") { %>
+                                            +$<%= Number(transaction.amount).toFixed(2) %>
+                                        <% } else { %>
+                                            -$<%= Number(transaction.amount).toFixed(2) %>
+                                        <% } %>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                <% } %>
+            </section>
+        </main>
+    </div>
+</div>
 
 <%- include("../partials/footer") %>

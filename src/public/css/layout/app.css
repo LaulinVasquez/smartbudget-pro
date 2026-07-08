@@ -1,19 +1,19 @@
 .app {
     display: grid;
-    grid-template-columns: 260px 1fr;
+    grid-template-columns: 260px minmax(0, 1fr);
     min-height: 100vh;
     background: var(--color-bg);
 }
 
 .app-main {
-    display: flex;
-    flex-direction: column;
+    background: var(--color-bg);
     min-width: 0;
 }
 
 .content {
-    flex: 1;
-    padding: var(--space-8);
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: var(--space-8);
 }
 
 @media (max-width: 900px) {

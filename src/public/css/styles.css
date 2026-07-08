@@ -11,17 +11,18 @@
 @import url("./base/base.css") layer(base);
 
 /* Layout */
-@import url("./layout/app-shell.css") layer(layout);
+@import url("./layout/app.css") layer(layout);
+@import url("./layout/auth.css") layer(layout);
+@import url("./layout/container.css") layer(layout);
 @import url("./layout/sidebar.css") layer(layout);
-@import url("./layout/header.css") layer(layout);
+@import url("./layout/topbar.css") layer(layout);
 
 /* Components */
-@import url("./components/buttons.css") layer(components);
-@import url("./components/cards.css") layer(components);
-@import url("./components/forms.css") layer(components);
-@import url("./components/tables.css") layer(components);
 @import url("./components/flash.css") layer(components);
-@import url("./components/badges.css") layer(components);
+@import url("./components/stat-card.css") layer(components);
+@import url("./components/cards.css") layer(components);
+
+
 
 /* Pages */
 @import url("./pages/dashboard.css") layer(pages);

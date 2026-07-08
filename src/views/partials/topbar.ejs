@@ -1,0 +1,16 @@
+<header class="topbar">
+    <div>
+        <h1><%= pageTitle || title %></h1>
+        <% if (user) { %>
+            <p>Welcome, <%= user.firstName %></p>
+        <% } %>
+    </div>
+
+    <div class="topbar-actions">
+        <form action="/logout" method="POST">
+            <button type="submit" class="btn btn-secondary">
+                Logout
+            </button>
+        </form>
+    </div>
+</header>

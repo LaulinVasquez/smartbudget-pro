@@ -1,0 +1,24 @@
+<aside class="sidebar">
+    <div class="sidebar-logo">
+        SmartBudget Pro
+    </div>
+
+    <nav>
+        <% if (user.role === "admin") { %>
+            <a href="/admin">Dashboard</a>
+            <a href="/admin/users">Users</a>
+            <a href="/admin/categories">Categories</a>
+            <a href="/admin/requests">Advisor Requests</a>
+        <% } else if (user.role === "advisor") { %>
+            <a href="/advisor">Dashboard</a>
+            <a href="/advisor/requests">Requests</a>
+            <a href="/advisor/clients">Clients</a>
+        <% } else { %>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/transaction">Transactions</a>
+            <a href="/budgets">Budgets</a>
+            <a href="/goals">Goals</a>
+            <a href="/reports">Reports</a>
+        <% } %>
+    </nav>
+</aside>
