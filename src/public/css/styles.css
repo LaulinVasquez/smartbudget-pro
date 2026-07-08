@@ -22,6 +22,7 @@
 @import url("./components/stat-card.css") layer(components);
 @import url("./components/tables.css") layer(components);
 @import url("./components/buttons.css") layer(components);
+@import url("./components/forms.css") layer(components);
 
 
 
