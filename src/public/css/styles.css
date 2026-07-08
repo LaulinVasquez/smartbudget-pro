@@ -20,7 +20,8 @@
 /* Components */
 @import url("./components/flash.css") layer(components);
 @import url("./components/stat-card.css") layer(components);
-@import url("./components/cards.css") layer(components);
+@import url("./components/tables.css") layer(components);
+@import url("./components/buttons.css") layer(components);
 
 
 
