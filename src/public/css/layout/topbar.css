@@ -1,0 +1,27 @@
+.topbar {
+    height: 72px;
+    background: var(--color-surface);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-inline: var(--space-8);
+
+    border-bottom: 1px solid var(--color-border);
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.topbar h1 {
+    margin: 0;
+    font-size: var(--text-xl);
+}
+
+.topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}

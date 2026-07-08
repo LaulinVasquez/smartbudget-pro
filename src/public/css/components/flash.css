@@ -1,0 +1,67 @@
+.flash-messages {
+    position: fixed;
+
+    top: 1.5rem;
+    right: 1.5rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+
+    z-index: 9999;
+
+    width: min(360px, calc(100vw - 2rem));
+}
+
+.flash {
+    padding: 1rem 1.25rem;
+
+    border-radius: var(--radius-md);
+
+    color: white;
+
+    box-shadow: var(--shadow-md);
+
+    animation:
+        slideIn .35s ease,
+        fadeOut .4s ease 4.6s forwards;
+}
+
+.flash.success {
+    background: var(--color-success);
+}
+
+.flash.error {
+    background: var(--color-danger);
+}
+
+.flash.warning {
+    background: var(--color-warning);
+}
+
+.flash.info {
+    background: var(--color-info);
+}
+
+@keyframes slideIn {
+
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+}
+
+@keyframes fadeOut {
+
+    to {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+
+}
