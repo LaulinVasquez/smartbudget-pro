@@ -43,7 +43,7 @@
             <label for="description">Description</label>
             <textarea id="description" name="description" maxlength="255"></textarea>
           </div>
-          <button type="submit" class="btn btn-secundary">Add Transaction</button>
+          <button type="submit" class="btn btn-primary">Add Transaction</button>
         </form>
       </section>
 
@@ -75,7 +75,7 @@
               <td>
                 <a href="/transaction/<%= transaction.transaction_id %>/edit">Edit</a>
                 <form action="/transaction/<%= transaction.transaction_id %>/delete" method="POST" style="display:inline;">
-                  <button type="submit">Delete</button>
+                  <button type="submit" class="btn btn-secundary">Delete</button>
                 </form>
               </td>
             </tr>
