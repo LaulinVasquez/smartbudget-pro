@@ -1,0 +1,27 @@
+<%
+const messages =
+  typeof flashMessages !== "undefined"
+    ? flashMessages
+    : {
+        success: [],
+        error: [],
+        warning: [],
+        info: [],
+      };
+
+const hasMessages = Object.values(messages).some(
+  (list) => list.length > 0
+);
+%>
+
+<% if (hasMessages) { %>
+  <div class="flash-messages" role="status" aria-live="polite">
+    <% Object.entries(messages).forEach(([type, list]) => { %>
+      <% list.forEach((message) => { %>
+        <div class="flash <%= type %>">
+          <%= message %>
+        </div>
+      <% }); %>
+    <% }); %>
+  </div>
+<% } %>

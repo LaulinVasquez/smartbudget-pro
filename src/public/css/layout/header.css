@@ -1,0 +1,49 @@
+.site-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 1rem 2rem;
+
+    background: var(--card);
+
+    border-bottom: 1px solid var(--border);
+
+}
+
+.site-logo a {
+
+    font-size: 1.4rem;
+
+    font-weight: 700;
+
+    color: var(--foreground);
+
+}
+
+.site-nav {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 1rem;
+
+}
+
+.site-nav .link {
+
+    color: var(--secondary-foreground);
+
+    font-weight: 500;
+
+}
+
+.site-nav .link:hover {
+
+    color: var(--primary);
+
+}
