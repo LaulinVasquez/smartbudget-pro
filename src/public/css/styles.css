@@ -24,6 +24,7 @@
 @import url("./components/tables.css") layer(components);
 @import url("./components/buttons.css") layer(components);
 @import url("./components/forms.css") layer(components);
+@import url("./components/cards.css") layer(components);
 
 
 
@@ -34,7 +35,7 @@
 @import url("./pages/errors.css") layer(pages);
 
 /* Utilities */
-@import url("./utilities/utilities.css");
+@import url("./utilities/utilities.css") layer(utilities);
 
 
 

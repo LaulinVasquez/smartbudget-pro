@@ -3,7 +3,7 @@
   <%- include("../partials/appSidebar") %>
   <div class="app-main">
     <%- include("../partials/topbar", { pageTitle: "Transactions" }) %>
-    <div class="content">
+    <main class="content">
       <section class="card">
         <h2>Add Transaction</h2>
 
@@ -48,7 +48,13 @@
       </section>
 
       <section class="card">
-        <h2>Your Transacctions</h2>
+        <div class="card-header"> 
+          <div>
+            <h2>Your Transacctions</h2>
+            <p>Review tour recent financial activity</p>
+          </div>
+        </div>
+
         <% if (transactions.length === 0) { %>
         <p>No Transactions yet.</p>
         <% } else{ %>
@@ -73,8 +79,8 @@
               <td><%= transaction.description || "-" %></td>
               <td><%= Number(transaction.amount).toFixed(2) %></td>
               <td>
-                <a href="/transaction/<%= transaction.transaction_id %>/edit">Edit</a>
-                <form action="/transaction/<%= transaction.transaction_id %>/delete" method="POST" style="display:inline;">
+                <a href="/transaction/<%= transaction.transaction_id %>/edit" class="btn btn-secundary">Edit</a>
+                <form action="/transaction/<%= transaction.transaction_id %>/delete" method="POST" class="inline-form" style="display:inline;">
                   <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
               </td>
@@ -84,7 +90,7 @@
         </table>
         <% } %>
       </section>
-    </div>
+    </main>
   </div>
 </div>
 <%- include("../partials/footer") %>
