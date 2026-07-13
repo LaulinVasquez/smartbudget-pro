@@ -5,7 +5,7 @@ import { buildRegister, registerUser, buildLogin, loginUser, logoutUser } from "
 
 // This where the app becomes restful
 
-const router = Router()
+const router = Router();
 //  GET / register -Retrieve data
 router.get("/register", buildRegister);
 //  POST /register - Handler registration form submission with validation

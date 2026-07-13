@@ -1,8 +1,9 @@
 import {Router} from "express";
 import { buildHome,buildAbout, testErrorPage } from "../controllers/baseController.js";
 import accountRoutes from "./account.js";
-import dashboardRoutes from "./dashboard.js"
-import transactionRoutes from "./transaction.js"
+import dashboardRoutes from "./dashboard.js";
+import transactionRoutes from "./transaction.js";
+import budgetRoutes from "./budget.js"
 
 // Create a new router instance
 const router = Router()
@@ -20,6 +21,10 @@ router.use("/", dashboardRoutes);
 
 // Transactions
 router.use("/", transactionRoutes);
+
+// Budget
+router.use("/", budgetRoutes);
+
 // This a test
 router.get("/errors21", testErrorPage);
 
