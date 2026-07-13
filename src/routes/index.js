@@ -3,7 +3,8 @@ import { buildHome,buildAbout, testErrorPage } from "../controllers/baseControll
 import accountRoutes from "./account.js";
 import dashboardRoutes from "./dashboard.js";
 import transactionRoutes from "./transaction.js";
-import budgetRoutes from "./budget.js"
+import budgetRoutes from "./budget.js";
+import goalRoutes from "./goal.js";
 
 // Create a new router instance
 const router = Router()
@@ -24,6 +25,9 @@ router.use("/", transactionRoutes);
 
 // Budget
 router.use("/", budgetRoutes);
+
+// Goals
+router.use("/", goalRoutes);
 
 // This a test
 router.get("/errors21", testErrorPage);
