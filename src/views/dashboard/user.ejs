@@ -89,9 +89,45 @@
             </div>
           </div>
 
-          <p class="empty-state">
-            Budget progress will appear here.
-          </p>
+          <% if (budgetProgress.length === 0) { %>
+          <div class="empty-state">
+            <p>No budgets created yet.</p>
+
+            <a href="/budget" class="btn btn-primary">
+              Create a Budget
+            </a>
+          </div>
+          <% } else { %>
+          <div class="budget-progress-list">
+            <% budgetProgress.forEach(budget => { %>
+            <div class="budget-progress-item">
+              <div class="budget-progress-header">
+                <div>
+                  <strong><%= budget.category_name %></strong>
+
+                  <small>
+                    $<%= budget.spent_amount.toFixed(2) %>
+                    of
+                    $<%= budget.budget_amount.toFixed(2) %>
+                  </small>
+                </div>
+
+                <span>
+                  <%= Math.round(budget.percentage) %>%
+                </span>
+              </div>
+
+              <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="<%= Math.round(budget.percentage) %>" aria-label="<%= budget.category_name %> budget progress">
+                <div class="progress-fill" style="width: <%= budget.percentage %>%"></div>
+              </div>
+            </div>
+            <% }) %>
+          </div>
+
+          <a href="/budget" class="link">
+            View all budgets
+          </a>
+          <% } %>
         </article>
       </section>
 

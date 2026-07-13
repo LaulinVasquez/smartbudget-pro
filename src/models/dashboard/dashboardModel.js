@@ -32,4 +32,69 @@ async function getRecentTransactions(userId) {
   return rows;
 }
 
-export { getDashboardSummary, getRecentTransactions };
+async function getBudgetProgress(userId) {
+  const sql = `
+    SELECT
+      b.budget_id,
+      b.amount AS budget_amount,
+      b.month,
+      b.year,
+      c.name AS category_name,
+
+      COALESCE(
+        SUM(
+          CASE
+            WHEN t.transaction_type = 'expense'
+            THEN t.amount
+            ELSE 0
+          END
+        ),
+        0
+      ) AS spent_amount
+
+    FROM budgets b
+
+    JOIN categories c
+      ON b.category_id = c.category_id
+
+    LEFT JOIN transactions t
+      ON t.user_id = b.user_id
+      AND t.category_id = b.category_id
+      AND EXTRACT(MONTH FROM t.transaction_date) = b.month
+      AND EXTRACT(YEAR FROM t.transaction_date) = b.year
+
+    WHERE b.user_id = $1
+
+    GROUP BY
+      b.budget_id,
+      b.amount,
+      b.month,
+      b.year,
+      c.name
+
+    ORDER BY b.year DESC, b.month DESC, c.name ASC
+
+    LIMIT 5;
+  `;
+
+  const { rows } = await db.query(sql, [userId]);
+
+  return rows.map((budget) => {
+    const budgetAmount = Number(budget.budget_amount);
+    const spentAmount = Number(budget.spent_amount);
+
+    const percentage =
+      budgetAmount > 0
+        ? Math.min((spentAmount / budgetAmount) * 100, 100)
+        : 0;
+
+    return {
+      ...budget,
+      budget_amount: budgetAmount,
+      spent_amount: spentAmount,
+      percentage,
+    };
+  });
+}
+
+export { getDashboardSummary, getRecentTransactions,getBudgetProgress };
