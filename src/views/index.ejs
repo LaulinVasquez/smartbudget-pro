@@ -1,8 +1,116 @@
 <%- include("partials/header") %>
 <%- include("partials/nav") %>
 
-<main>
-    <h2>Welcome to SmartBudget Pro 🚀</h2>
-    <p>Take contro of your finances and achieve your goals</p>
+<main class="landing-page">
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-badge">Simple personal finance management</span>
+
+      <h1>
+        Take control of your money and build a better financial future.
+      </h1>
+
+      <p class="hero-description">
+        SmartBudget Pro helps you track transactions, create monthly budgets,
+        monitor savings goals, and understand where your money is going.
+      </p>
+
+      <div class="hero-actions">
+        <a href="/register" class="btn btn-primary">
+          Create Free Account
+        </a>
+
+        <a href="/login" class="btn btn-secondary">
+          Log In
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-preview" aria-label="SmartBudget Pro dashboard preview">
+      <div class="preview-header">
+        <div>
+          <small>Current Balance</small>
+          <strong>$8,420.75</strong>
+        </div>
+
+        <span class="preview-status">On track</span>
+      </div>
+
+      <div class="preview-stats">
+        <div>
+          <small>Income</small>
+          <strong class="preview-income">+$4,800</strong>
+        </div>
+
+        <div>
+          <small>Expenses</small>
+          <strong class="preview-expense">-$2,350</strong>
+        </div>
+      </div>
+
+      <div class="preview-budget">
+        <div class="preview-budget-header">
+          <span>Monthly Budget</span>
+          <span>68%</span>
+        </div>
+
+        <div class="progress-track">
+          <div class="progress-fill landing-progress"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="landing-features" aria-labelledby="features-title">
+    <div class="section-heading">
+      <span class="section-label">Everything in one place</span>
+      <h2 id="features-title">Manage your finances with confidence</h2>
+      <p>
+        Use practical tools that make your financial information easier to
+        understand and manage.
+      </p>
+    </div>
+
+    <div class="feature-grid">
+      <article class="feature-card">
+        <div class="feature-icon">$</div>
+        <h3>Track Transactions</h3>
+        <p>
+          Record income and expenses by category and keep your financial
+          activity organized.
+        </p>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-icon">%</div>
+        <h3>Create Budgets</h3>
+        <p>
+          Set monthly spending limits and monitor your progress before you go
+          over budget.
+        </p>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-icon">✓</div>
+        <h3>Reach Your Goals</h3>
+        <p>
+          Create savings goals, add contributions, and watch your progress
+          grow over time.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="landing-cta">
+    <div>
+      <h2>Ready to take control of your finances?</h2>
+      <p>Create an account and start building better financial habits today.</p>
+    </div>
+
+    <a href="/register" class="btn btn-primary">
+      Get Started
+    </a>
+  </section>
 </main>
+
 <%- include("partials/footer") %>
