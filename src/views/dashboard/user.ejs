@@ -1,75 +1,142 @@
 <%- include("../partials/header") %>
 
 <div class="app">
-    <%- include("../partials/appSidebar") %>
+  <%- include("../partials/appSidebar") %>
 
-    <div class="app-main">
-        <%- include("../partials/topbar", { pageTitle: "Dashboard" }) %>
+  <div class="app-main">
+    <%- include("../partials/topbar", { pageTitle: "Dashboard" }) %>
 
-        <main class="content">
-            <section>
-                <h2>Financial Overview</h2>
+    <main class="content">
+      <section>
+        <h2>Financial Overview</h2>
 
-                <div class="stat-grid">
-                    <article class="stat-card">
-                        <p>Current Balance</p>
-                        <strong>$<%= Number(summary.current_balance).toFixed(2) %></strong>
-                    </article>
+        <div class="stat-grid">
+          <article class="stat-card">
+            <p class="stat-title">Current Balance</p>
+            <div class="stat-value">
+              $<%= Number(summary.current_balance).toFixed(2) %>
+            </div>
+            <p class="stat-footer">
+              Updated today
+            </p>
+          </article>
 
-                    <article class="stat-card">
-                        <p>Total Income</p>
-                        <strong>$<%= Number(summary.total_income).toFixed(2) %></strong>
-                    </article>
+          <article class="stat-card">
+            <p class="stat-title">Total Income</p>
+            <div class="stat-value">
+              $<%= Number(summary.total_income).toFixed(2) %>
+            </div>
+            <p class="stat-footer">
+              Updated today
+            </p>
+          </article>
 
-                    <article class="stat-card">
-                        <p>Total Expenses</p>
-                        <strong>$<%= Number(summary.total_expenses).toFixed(2) %></strong>
-                    </article>
-                </div>
-            </section>
+          <article class="stat-card">
+            <p class="stat-title">Total Expenses</p>
+            <div class="stat-value">
+              $<%= Number(summary.total_expenses).toFixed(2) %>
+            </div>
+            <p class="stat-footer">
+              Updated today
+            </p>
+          </article>
+        </div>
+      </section>
+      <section class="dashboard-grid">
+        <article class="card">
+          <div class="card-header">
+            <div>
+              <h3>Quick Actions</h3>
+              <p>Manage your finances faster.</p>
+            </div>
+          </div>
 
-            <section class="card">
-                <h2>Recent Transactions</h2>
+          <div class="quick-actions">
+            <a href="/transaction" class="quick-action">
+              <span class="quick-action-icon">+</span>
 
-                <% if (transactions.length === 0) { %>
-                    <p>No transactions yet.</p>
-                    <a class="btn btn-primary" href="/transaction">
-                        Add your first transaction
-                    </a>
+              <span>
+                <strong>Add Transaction</strong>
+                <small>Record income or expenses</small>
+              </span>
+            </a>
+
+            <a href="/budget" class="quick-action">
+              <span class="quick-action-icon">+</span>
+
+              <span>
+                <strong>Create Budget</strong>
+                <small>Set a monthly spending limit</small>
+              </span>
+            </a>
+
+            <a href="/goal" class="quick-action">
+              <span class="quick-action-icon">+</span>
+
+              <span>
+                <strong>Create Goal</strong>
+                <small>Start tracking a savings goal</small>
+              </span>
+            </a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <div>
+              <h3>Budget Progress</h3>
+              <p>See how much of each budget you have used.</p>
+            </div>
+          </div>
+
+          <p class="empty-state">
+            Budget progress will appear here.
+          </p>
+        </article>
+      </section>
+
+      <section class="card">
+        <h2>Recent Transactions</h2>
+
+        <% if (transactions.length === 0) { %>
+        <p>No transactions yet.</p>
+        <a class="btn btn-primary" href="/transaction">
+          Add your first transaction
+        </a>
+        <% } else { %>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Category</th>
+              <th>Description</th>
+              <th>Type</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% transactions.forEach(transaction => { %>
+            <tr>
+              <td><%= transaction.transaction_date.toISOString().slice(0, 10) %></td>
+              <td><%= transaction.category_name || "Uncategorized" %></td>
+              <td><%= transaction.description || "-" %></td>
+              <td><%= transaction.transaction_type %></td>
+              <td>
+                <% if (transaction.transaction_type === "income") { %>
+                +$<%= Number(transaction.amount).toFixed(2) %>
                 <% } else { %>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Category</th>
-                                <th>Description</th>
-                                <th>Type</th>
-                                <th>Amount</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <% transactions.forEach(transaction => { %>
-                                <tr>
-                                    <td><%= transaction.transaction_date.toISOString().slice(0, 10) %></td>
-                                    <td><%= transaction.category_name || "Uncategorized" %></td>
-                                    <td><%= transaction.description || "-" %></td>
-                                    <td><%= transaction.transaction_type %></td>
-                                    <td>
-                                        <% if (transaction.transaction_type === "income") { %>
-                                            +$<%= Number(transaction.amount).toFixed(2) %>
-                                        <% } else { %>
-                                            -$<%= Number(transaction.amount).toFixed(2) %>
-                                        <% } %>
-                                    </td>
-                                </tr>
-                            <% }) %>
-                        </tbody>
-                    </table>
+                -$<%= Number(transaction.amount).toFixed(2) %>
                 <% } %>
-            </section>
-        </main>
-    </div>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+        <% } %>
+      </section>
+    </main>
+  </div>
 </div>
 
 <%- include("../partials/footer") %>
