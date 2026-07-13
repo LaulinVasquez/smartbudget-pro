@@ -237,11 +237,4 @@ async function addGoalContribution(contributionData) {
   return rows[0] ?? null;
 }
 
-export {
-  createGoal,
-  getGoalsByUser,
-  getGoalById,
-  updateGoal,
-  deleteGoal,
-  addGoalContribution,
-};
+export { createGoal, getGoalsByUser, getGoalById, updateGoal, deleteGoal, addGoalContribution, };
