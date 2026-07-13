@@ -1,0 +1,20 @@
+.error-page {
+    max-width: 700px;
+    margin: 5rem auto;
+    text-align: center;
+}
+
+.error-page h1 {
+    font-size: 5rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.error-page h2 {
+    margin-bottom: 1rem;
+}
+
+.error-page p {
+    color: var(--muted-foreground);
+    margin-bottom: 2rem;
+}

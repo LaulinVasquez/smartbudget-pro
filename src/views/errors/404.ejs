@@ -1,11 +1,30 @@
 <%- include("../partials/header") %>
 <%- include("../partials/nav") %>
 
-<main>
-    <h2> <%= title %></h2>
-    <p><%= error %></p>
-    <p>
-        <a href="/">&larr; Home</a> 
-    </p>
+<main class="content">
+    <section class="card error-page">
+
+        <h1>404</h1>
+
+        <h2><%= title %></h2>
+
+        <p><%= error %></p>
+
+        <% if (isLoggedIn) { %>
+
+            <a href="/dashboard" class="btn btn-primary">
+                &larr; Back to Dashboard
+            </a>
+
+        <% } else { %>
+
+            <a href="/" class="btn btn-primary">
+                &larr; Back to Home
+            </a>
+
+        <% } %>
+
+    </section>
 </main>
+
 <%- include("../partials/footer") %>
