@@ -1,11 +1,11 @@
 import { createBudget, getBudgetsByUser, getBudgetById, updateBudget, deleteBudget } from "../../models/budgets/budgetModel.js";
-import {getAllCategories} from "../../models/category/categoryModel.js";
+import { getAllcategories } from "../../models/category/categoryModel.js";
 
 async function buildBudgets(req,res,next) {
     try{
         const userId = req.session.user.userId;
         const budget = await getBudgetsByUser(userId);
-        const categories = await getAllCategories();
+        const categories = await getAllcategories();
 
         return res.render("budget/index", {
             title: "Budgets",
@@ -29,7 +29,7 @@ async function addBudget(req,res,next) {
             amount: req.body.amount,
         });
         req.flash("success", "Budget crated successfully.")
-        return res.redirect("budgets");
+        return res.redirect("budget");
     } catch(error){
         next(error);
     }
@@ -42,11 +42,11 @@ async function buildEditBudget(req,res,next){
         const budgetId = req.params.budgetId;
 
         const budget = await getBudgetById(budgetId, userId);
-        const categories = await getAllCategories();
+        const categories = await getAllcategories();
 
         if (!budget) {
             req.flash("error", "Budget not found.")
-            return res.redirect("/budgets");
+            return res.redirect("/budget");
         }
         
         return res.render("budget/edit", {
@@ -77,11 +77,11 @@ async function editBudget(req, res, next) {
 
     if (!updatedBudget) {
       req.flash("error", "Budget not found.");
-      return res.redirect("/budgets");
+      return res.redirect("/budget");
     }
 
     req.flash("success", "Budget updated successfully.");
-    return res.redirect("/budgets");
+    return res.redirect("/budget");
   } catch (error) {
     next(error);
   }
@@ -96,14 +96,14 @@ async function removeBudget(req, res, next) {
 
     if (!deletedBudget) {
       req.flash("error", "Budget not found.");
-      return res.redirect("/budgets");
+      return res.redirect("/budget");
     }
 
     req.flash("success", "Budget deleted successfully.");
-    return res.redirect("/budgets");
+    return res.redirect("/budget");
   } catch (error) {
     next(error);
   }
 }
 
-export {buildBudgets, addBudget, buildEditBudget, editBudget, editBudget, removeBudget};
+export {buildBudgets, addBudget, buildEditBudget, editBudget, removeBudget};

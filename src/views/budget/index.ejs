@@ -1,0 +1,165 @@
+<%- include("../partials/header") %>
+
+<div class="app">
+  <%- include("../partials/appSidebar") %>
+
+  <div class="app-main">
+    <%- include("../partials/topbar", { pageTitle: "Budgets" }) %>
+
+    <main class="content">
+      <div class="page-header">
+        <div>
+          <h2>Budgets</h2>
+          <p>Create and manage monthly spending limits.</p>
+        </div>
+      </div>
+
+      <section class="card">
+        <h3>Create Budget</h3>
+
+        <form action="/budget" method="POST" class="form-grid" novalidate>
+          <div class="form-group">
+            <label for="categoryId">Category</label>
+
+            <select id="categoryId" name="categoryId" required>
+              <option value="">Select category</option>
+
+              <% categories.forEach(category => { %>
+                <option value="<%= category.category_id %>">
+                  <%= category.name %>
+                </option>
+              <% }) %>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="month">Month</label>
+
+            <select id="month" name="month" required>
+              <option value="">Select month</option>
+              <option value="1">January</option>
+              <option value="2">February</option>
+              <option value="3">March</option>
+              <option value="4">April</option>
+              <option value="5">May</option>
+              <option value="6">June</option>
+              <option value="7">July</option>
+              <option value="8">August</option>
+              <option value="9">September</option>
+              <option value="10">October</option>
+              <option value="11">November</option>
+              <option value="12">December</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="year">Year</label>
+
+            <input
+              type="number"
+              id="year"
+              name="year"
+              min="2020"
+              max="2100"
+              value="<%= new Date().getFullYear() %>"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="amount">Budget Amount</label>
+
+            <input
+              type="number"
+              id="amount"
+              name="amount"
+              min="0.01"
+              step="0.01"
+              required
+            >
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            Create Budget
+          </button>
+        </form>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <div>
+            <h3>Your Budgets</h3>
+            <p>Review and update your monthly budget limits.</p>
+          </div>
+        </div>
+
+        <% if (budget.length === 0) { %>
+          <p>No budgets created yet.</p>
+        <% } else { %>
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Month</th>
+                  <th>Year</th>
+                  <th>Amount</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% const monthNames = [
+                  "January",
+                  "February",
+                  "March",
+                  "April",
+                  "May",
+                  "June",
+                  "July",
+                  "August",
+                  "September",
+                  "October",
+                  "November",
+                  "December"
+                ]; %>
+
+                <% budget.forEach(budgets => { %>
+                  <tr>
+                    <td><%= budgets.category_name %></td>
+                    <td><%= monthNames[budgets.month - 1] %></td>
+                    <td><%= budgets.year %></td>
+                    <td>$<%= Number(budgets.amount).toFixed(2) %></td>
+
+                    <td>
+                      <div class="actions">
+                        <a
+                          href="/budget/<%= budgets.budget_id %>/edit"
+                          class="btn btn-secondary"
+                        >
+                          Edit
+                        </a>
+
+                        <form
+                          action="/budget/<%= budgets.budget_id %>/delete"
+                          method="POST"
+                          class="inline-form"
+                        >
+                          <button type="submit" class="btn btn-danger">
+                            Delete
+                          </button>
+                        </form>
+                      </div>
+                    </td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        <% } %>
+      </section>
+    </main>
+  </div>
+</div>
+
+<%- include("../partials/footer") %>

@@ -2,42 +2,42 @@ import { Router } from "express";
 import { requireLogin, requireRole} from "../middleware/auth/auth.js";
 import budgetValidation from "../middleware/validation/budgetValidation.js";
 import validate from "../middleware/validation/validate.js";
-import {buildBudgets, addBudget, buildEditBudget, editBudget, editBudget, removeBudget} from "../controllers/budget/budgetController.js"
+import {buildBudgets, addBudget, buildEditBudget, editBudget, removeBudget} from "../controllers/budget/budgetController.js"
 
-const router = router();
+const router = Router();
 
-router.get("/budgets", 
+router.get("/budget", 
     requireLogin,
     requireRole("user"),
     buildBudgets,
 );
 
-router.post("/budgets",
+router.post("/budget",
     requireLogin,
     requireRole("user"),
     budgetValidation.create,
-    validate("/budgets"),
+    validate("/budget"),
     addBudget,
 );
 
 router.get(
-  "/budgets/:budgetId/edit",
+  "/budget/:budgetId/edit",
   requireLogin,
   requireRole("user"),
   buildEditBudget,
 );
 
 router.post(
-  "/budgets/:budgetId/edit",
+  "/budget/:budgetId/edit",
   requireLogin,
   requireRole("user"),
   budgetValidation.update,
-  validate("/budgets"),
+  validate("/budget"),
   editBudget,
 );
 
 router.post(
-  "/budgets/:budgetId/delete",
+  "/budget/:budgetId/delete",
   requireLogin,
   requireRole("user"),
   removeBudget,
