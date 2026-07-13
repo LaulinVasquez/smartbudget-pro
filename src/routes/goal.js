@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { requireLogin, requireRole} from "../middleware/auth.js"
+import { requireLogin, requireRole} from "../middleware/auth/auth.js"
 import goalValidation from "../middleware/validation/goalValidation.js";
 import validate from "../middleware/validation/validate.js";
 import {buildGoals, addGoal, buildEditGoal, editGoal, removeGoal, contributeToGoal} from "../controllers/goal/goalController.js";

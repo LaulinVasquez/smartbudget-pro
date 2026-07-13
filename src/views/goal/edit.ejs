@@ -1,0 +1,101 @@
+<%- include("../partials/header") %>
+
+<div class="app">
+  <%- include("../partials/appSidebar") %>
+
+  <div class="app-main">
+    <%- include("../partials/topbar", { pageTitle: "Edit Goal" }) %>
+
+    <main class="content">
+      <section class="card">
+        <h2>Edit Goal</h2>
+
+        <form
+          action="/goal/<%= goal.goal_id %>/edit"
+          method="POST"
+          class="form-grid"
+          novalidate
+        >
+          <div class="form-group">
+            <label for="name">Goal Name</label>
+
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value="<%= goal.name %>"
+              maxlength="155"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+
+            <textarea
+              id="description"
+              name="description"
+              maxlength="500"
+            ><%= goal.description || "" %></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="targetAmount">Target Amount</label>
+
+            <input
+              type="number"
+              id="targetAmount"
+              name="targetAmount"
+              value="<%= goal.target_amount %>"
+              min="0.01"
+              step="0.01"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="targetDate">Target Date</label>
+
+            <input
+              type="date"
+              id="targetDate"
+              name="targetDate"
+              value="<%= goal.target_date.toISOString().slice(0, 10) %>"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="status">Status</label>
+
+            <select id="status" name="status" required>
+              <option value="active" <%= goal.status === "active" ? "selected" : "" %>>
+                Active
+              </option>
+
+              <option value="paused" <%= goal.status === "paused" ? "selected" : "" %>>
+                Paused
+              </option>
+
+              <option value="completed" <%= goal.status === "completed" ? "selected" : "" %>>
+                Completed
+              </option>
+            </select>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn btn-primary">
+              Save Changes
+            </button>
+
+            <a href="/goal" class="btn btn-secondary">
+              Cancel
+            </a>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+</div>
+
+<%- include("../partials/footer") %>

@@ -28,7 +28,7 @@ async function addGoal(req, res, next) {
     });
 
     req.flash("success", "Goal created successfully.");
-    return res.redirect("/goal");
+    return res.redirect("/goal/");
   } catch (error) {
     next(error);
   }

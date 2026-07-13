@@ -12,7 +12,7 @@ async function createGoal(goalData) {
     } = goalData;
 
     const sql = `
-        IMSERT INTO goals (
+        INSERT INTO goals (
             user_id,
             name,
             description,
