@@ -32,6 +32,7 @@
 @import url("./pages/dashboard.css") layer(pages);
 @import url("./pages/goals.css") layer(pages);
 @import url("./pages/home.css") layer(pages);
+@import url("./pages/advisor.css") layer(pages);
 @import url("./pages/transactions.css")layer(pages);
 @import url("./pages/auth.css") layer(pages);
 @import url("./pages/errors.css") layer(pages);
