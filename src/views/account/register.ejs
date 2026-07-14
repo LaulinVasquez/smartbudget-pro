@@ -1,104 +1,78 @@
 <%- include("../partials/header") %>
 <%- include("../partials/nav") %>
 
-<main class="container">
+<main class="auth-layout">
+  <section class="auth-card auth-card-wide">
+    <header class="auth-header">
+      <span class="auth-badge">Start managing your finances</span>
 
-    <h1>Create Account</h1>
-<% if (errors.length > 0) { %>
+      <h1>Create your account</h1>
 
-<div class="validation-errors">
+      <p>
+        Track spending, build budgets, and reach your savings goals with
+        SmartBudget Pro.
+      </p>
+    </header>
 
-    <ul>
+    <form action="/register" method="POST" class="form-grid register-form" >
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">First name</label>
 
-    <% errors.forEach(error => { %>
-
-        <li><%= error.msg %></li>
-
-    <% }) %>
-
-    </ul>
-
-</div>
-
-<% } %>
-    <form action="/register" method="POST" novalidate>
-
-        <div>
-            <label for="firstName">First Name</label>
-
-            <input
-                type="text"
-                id="firstName"
-                name="firstName"
-                value="<%= formData.firstName || '' %>"
-                required
-            >
+          <input type="text" id="firstName" name="firstName" autocomplete="given-name" maxlength="100" placeholder="John" required>
         </div>
 
-        <div>
-            <label for="lastName">Last Name</label>
+        <div class="form-group">
+          <label for="lastName">Last name</label>
 
-            <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                value="<%= formData.lastName || '' %>"
-                required
-            >
+          <input type="text" id="lastName" name="lastName" autocomplete="family-name" maxlength="100" placeholder="Rodriguez" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="email">Email address</label>
+
+          <input type="email" id="email" name="email" autocomplete="email" maxlength="255" placeholder="john@example.com" required>
         </div>
 
-        <div>
-            <label for="email">Email</label>
+        <div class="form-group">
+          <label for="emailConfirm">Confirm email</label>
 
-            <input
-                type="email"
-                id="email"
-                name="email"
-                value="<%= formData.email || '' %>"
-                required
-            >
+          <input type="email" id="emailConfirm" name="emailConfirm" autocomplete="email" maxlength="255" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="password">Password</label>
+
+          <input type="password" id="password" name="password" placeholder="••••••••" required>
         </div>
 
-        <div>
-            <label for="emailConfirm">Confirm Email</label>
+        <div class="form-group">
+          <label for="passwordConfirm">Confirm password</label>
 
-            <input
-                type="email"
-                id="emailConfirm"
-                name="emailConfirm"
-                value="<%= formData.emailConfirm || '' %>"
-                required
-            >
+          <input type="password" id="passwordConfirm" name="passwordConfirm" required>
         </div>
+      </div>
 
-        <div>
-            <label for="password">Password</label>
+      <small class="form-help">
+        Use at least 8 characters with uppercase, lowercase, number, and special character.
+      </small>
 
-            <input
-                type="password"
-                id="password"
-                name="password"
-                required
-            >
-        </div>
-
-        <div>
-            <label for="passwordConfirm">Confirm Password</label>
-
-            <input
-                type="password"
-                id="passwordConfirm"
-                name="passwordConfirm"
-                required
-            >
-        </div>
-
-        <button type="submit">
-            Create Account
-        </button>
-
+      <button type="submit" class="btn btn-primary auth-submit">
+        Create Account
+      </button>
     </form>
 
+    <footer class="auth-footer">
+      <p>
+        Already have an account?
+        <a href="/login" class="link">Log in</a>
+      </p>
+    </footer>
+  </section>
 </main>
 
 <%- include("../partials/footer") %>

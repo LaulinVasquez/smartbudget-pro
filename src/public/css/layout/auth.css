@@ -26,3 +26,52 @@
   margin-top: var(--space-5);
   text-align: center;
 }
+
+.auth-card-wide {
+  width: min(100%, 760px);
+}
+
+.auth-badge {
+  display: inline-block;
+  margin-bottom: var(--space-4);
+  padding: var(--space-2) var(--space-3);
+
+  background: var(--accent);
+  color: var(--primary);
+
+  border-radius: 999px;
+
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.form-help {
+  color: var(--muted-foreground);
+  font-size: var(--text-xs);
+  line-height: var(--leading-normal);
+}
+
+.auth-submit {
+  width: 100%;
+  margin-top: var(--space-2);
+}
+
+@media (max-width: 650px) {
+  .auth-layout {
+    padding: var(--space-4);
+  }
+
+  .auth-card {
+    padding: var(--space-5);
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
