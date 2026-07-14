@@ -1,0 +1,96 @@
+<%- include("../partials/header") %>
+
+<div class="app">
+  <%- include("../partials/appSidebar") %>
+
+  <div class="app-main">
+    <%- include("../partials/topbar", { pageTitle: "Advisor Request" }) %>
+
+    <main class="content">
+      <section class="card request-details">
+        <div class="card-header">
+          <div>
+            <span class="badge badge-<%= request.status %>">
+              <%= request.status.replace("_", " ") %>
+            </span>
+
+            <h2><%= request.subject %></h2>
+
+            <p>
+              Submitted by
+              <strong>
+                <%= request.user_first_name %>
+                <%= request.user_last_name %>
+              </strong>
+            </p>
+          </div>
+        </div>
+
+        <dl class="request-meta">
+          <div>
+            <dt>Email</dt>
+            <dd><%= request.user_email %></dd>
+          </div>
+
+          <div>
+            <dt>Submitted</dt>
+            <dd><%= new Date(request.created_at).toLocaleString() %></dd>
+          </div>
+        </dl>
+
+        <div class="request-message">
+          <h3>Message</h3>
+          <p><%= request.message %></p>
+        </div>
+
+        <% if (request.advisor_id === null) { %>
+          <form
+            action="/advisor/requests/<%= request.request_id %>/accept"
+            method="POST"
+          >
+            <button type="submit" class="btn btn-primary">
+              Accept Request
+            </button>
+          </form>
+        <% } else { %>
+          <form
+            action="/advisor/requests/<%= request.request_id %>/status"
+            method="POST"
+            class="form-grid"
+            novalidate
+          >
+            <div class="form-group">
+              <label for="status">Request Status</label>
+
+              <select id="status" name="status" required>
+                <option
+                  value="in_progress"
+                  <%= request.status === "in_progress" ? "selected" : "" %>
+                >
+                  In Progress
+                </option>
+
+                <option
+                  value="completed"
+                  <%= request.status === "completed" ? "selected" : "" %>
+                >
+                  Completed
+                </option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              Update Status
+            </button>
+          </form>
+        <% } %>
+
+        <a href="/advisor" class="btn btn-secondary">
+          Back to Requests
+        </a>
+      </section>
+    </main>
+  </div>
+</div>
+
+<%- include("../partials/footer") %>

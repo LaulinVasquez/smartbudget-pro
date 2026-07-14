@@ -1,0 +1,134 @@
+<%- include("../partials/header") %>
+
+<div class="app">
+  <%- include("../partials/appSidebar") %>
+
+  <div class="app-main">
+    <%- include("../partials/topbar", { pageTitle: "Advisor Dashboard" }) %>
+
+    <main class="content">
+      <div class="page-header">
+        <div>
+          <h2>Advisor Requests</h2>
+          <p>Review unassigned requests and manage the requests assigned to you.</p>
+        </div>
+      </div>
+
+      <section class="stat-grid">
+        <article class="stat-card">
+          <p class="stat-title">Available Requests</p>
+
+          <div class="stat-value">
+            <%= requests.filter(request => request.advisor_id === null).length %>
+          </div>
+
+          <p class="stat-footer">Waiting for an advisor</p>
+        </article>
+
+        <article class="stat-card">
+          <p class="stat-title">In Progress</p>
+
+          <div class="stat-value">
+            <%= requests.filter(request =>
+              Number(request.advisor_id) === Number(user.userId) &&
+              request.status === "in_progress"
+            ).length %>
+          </div>
+
+          <p class="stat-footer">Currently assigned to you</p>
+        </article>
+
+        <article class="stat-card">
+          <p class="stat-title">Completed</p>
+
+          <div class="stat-value">
+            <%= requests.filter(request =>
+              Number(request.advisor_id) === Number(user.userId) &&
+              request.status === "completed"
+            ).length %>
+          </div>
+
+          <p class="stat-footer">Finished requests</p>
+        </article>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <div>
+            <h3>Request Queue</h3>
+            <p>Select a request to review its details.</p>
+          </div>
+        </div>
+
+        <% if (requests.length === 0) { %>
+          <div class="empty-state">
+            <p>There are no available or assigned requests.</p>
+          </div>
+        <% } else { %>
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Subject</th>
+                  <th>Status</th>
+                  <th>Assignment</th>
+                  <th>Submitted</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% requests.forEach(request => { %>
+                  <tr>
+                    <td>
+                      <strong>
+                        <%= request.user_first_name %>
+                        <%= request.user_last_name %>
+                      </strong>
+
+                      <small class="table-subtext">
+                        <%= request.user_email %>
+                      </small>
+                    </td>
+
+                    <td><%= request.subject %></td>
+
+                    <td>
+                      <span class="badge badge-<%= request.status %>">
+                        <%= request.status.replace("_", " ") %>
+                      </span>
+                    </td>
+
+                    <td>
+                      <% if (request.advisor_id === null) { %>
+                        Unassigned
+                      <% } else { %>
+                        Assigned to you
+                      <% } %>
+                    </td>
+
+                    <td>
+                      <%= new Date(request.created_at).toLocaleDateString() %>
+                    </td>
+
+                    <td>
+                      <a
+                        href="/advisor/requests/<%= request.request_id %>"
+                        class="btn btn-secondary"
+                      >
+                        Review
+                      </a>
+                    </td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        <% } %>
+      </section>
+    </main>
+  </div>
+</div>
+
+<%- include("../partials/footer") %>

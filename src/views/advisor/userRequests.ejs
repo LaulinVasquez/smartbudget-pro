@@ -1,0 +1,133 @@
+<%- include("../partials/header") %>
+
+<div class="app">
+  <%- include("../partials/appSidebar") %>
+
+  <div class="app-main">
+    <%- include("../partials/topbar", { pageTitle: "Advisor Requests" }) %>
+
+    <main class="content">
+      <div class="page-header">
+        <div>
+          <h2>Financial Advisor Requests</h2>
+          <p>Send a request when you need help with your financial plan.</p>
+        </div>
+      </div>
+
+      <section class="card">
+        <h3>Submit a Request</h3>
+
+        <form
+          action="/advisor-requests"
+          method="POST"
+          class="form-grid"
+          novalidate
+        >
+          <div class="form-group">
+            <label for="subject">Subject</label>
+
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              minlength="3"
+              maxlength="150"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+
+            <textarea
+              id="message"
+              name="message"
+              minlength="10"
+              maxlength="1000"
+              rows="6"
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            Submit Request
+          </button>
+        </form>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <div>
+            <h3>Your Requests</h3>
+            <p>Track the status of your advisor requests.</p>
+          </div>
+        </div>
+
+        <% if (requests.length === 0) { %>
+          <div class="empty-state">
+            <p>You have not submitted any advisor requests yet.</p>
+          </div>
+        <% } else { %>
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Subject</th>
+                  <th>Advisor</th>
+                  <th>Status</th>
+                  <th>Submitted</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% requests.forEach(request => { %>
+                  <tr>
+                    <td><%= request.subject %></td>
+
+                    <td>
+                      <% if (request.advisor_first_name) { %>
+                        <%= request.advisor_first_name %>
+                        <%= request.advisor_last_name %>
+                      <% } else { %>
+                        Unassigned
+                      <% } %>
+                    </td>
+
+                    <td>
+                      <span class="badge badge-<%= request.status %>">
+                        <%= request.status.replace("_", " ") %>
+                      </span>
+                    </td>
+
+                    <td>
+                      <%= new Date(request.created_at).toLocaleDateString() %>
+                    </td>
+
+                    <td>
+                      <% if (request.status === "pending") { %>
+                        <form
+                          action="/advisor-requests/<%= request.request_id %>/delete"
+                          method="POST"
+                          class="inline-form"
+                        >
+                          <button type="submit" class="btn btn-danger">
+                            Delete
+                          </button>
+                        </form>
+                      <% } else { %>
+                        <span class="muted-text">Locked</span>
+                      <% } %>
+                    </td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        <% } %>
+      </section>
+    </main>
+  </div>
+</div>
+
+<%- include("../partials/footer") %>
