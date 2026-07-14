@@ -2,7 +2,7 @@ import db from "../../database/db.js";
 
 //  CREATE - user submits a request
 async function createAdvisorRequest(requestData) {
-    const {userId, advisorId = null, subject, message, status = "pending",} = requestData;
+    const {userId, advisorId = null, subject, message, status = "submitted",} = requestData;
 
     const sql =`
         INSERT INTO advisor_requests (
@@ -68,7 +68,14 @@ async function getRequestsForAdvisor(advisorId) {
         WHERE ar.advisor_id = $1
             OR ar.advisor_id IS NULL
         ORDER BY
-            CASE WHEN ar.status = 'pending' THEN 0 ELSE 1 END,
+            CASE 
+                WHEN ar.status = 'submitted' THEN 0
+                WHEN ar.status = 'reviewing' THEN 1
+                WHEN ar.status = 'accepted' THEN 2
+                WHEN ar.status = 'completed' THEN 3
+                WHEN ar.status = 'rejected' THEN 4
+        ELSE 5
+            END,
             ar.created_at DESC;
     `;
 
@@ -105,7 +112,7 @@ async function assignRequestToAdvisor(requestId, advisorId) {
     UPDATE advisor_requests
     SET
         advisor_id = $1,
-        status = 'in_progress'
+        status = 'reviewing'
     WHERE request_id = $2
         AND advisor_id IS NULL
     RETURNING
@@ -140,7 +147,7 @@ async function deleteAdvisorRequest(requestId, userId) {
     DELETE FROM advisor_requests
     WHERE request_id = $1
         AND user_id = $2
-        AND status = 'pending'
+        AND status = 'submitted'
     RETURNING request_id;
   `;
 

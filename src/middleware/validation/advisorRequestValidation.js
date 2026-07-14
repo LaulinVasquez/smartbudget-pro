@@ -20,7 +20,7 @@ const updateStatus = [
   body("status")
     .notEmpty()
     .withMessage("Status is required.")
-    .isIn(["pending", "in_progress", "completed"])
+    .isIn([ "submitted", "reviewing", "accepted", "completed", "rejected", ])
     .withMessage("Please select a valid request status."),
 ];
 

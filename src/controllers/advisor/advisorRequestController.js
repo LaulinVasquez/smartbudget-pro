@@ -5,7 +5,7 @@ async function buildUserAdvisorRequests(req, res, next) {
     const userId = req.session.user.userId;
     const requests = await getRequestsByUser(userId);
 
-    return res.render("/advisor/userRequests", {
+    return res.render("./advisor/userRequests", {
       title: "Advisor Requests",
       requests,
     });
@@ -55,7 +55,7 @@ async function buildAdvisorRequests(req, res, next) {
     const advisorId = req.session.user.userId;
     const requests = await getRequestsForAdvisor(advisorId);
 
-    return res.render("/advisor/index", {
+    return res.render("advisor/index", {
       title: "Advisor Dashboard",
       requests,
     });

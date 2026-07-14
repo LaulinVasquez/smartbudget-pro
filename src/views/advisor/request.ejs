@@ -11,7 +11,7 @@
         <div class="card-header">
           <div>
             <span class="badge badge-<%= request.status %>">
-              <%= request.status.replace("_", " ") %>
+              <%= request.status.replaceAll("_", " ") %>
             </span>
 
             <h2><%= request.subject %></h2>
@@ -34,7 +34,9 @@
 
           <div>
             <dt>Submitted</dt>
-            <dd><%= new Date(request.created_at).toLocaleString() %></dd>
+            <dd>
+              <%= new Date(request.created_at).toLocaleString() %>
+            </dd>
           </div>
         </dl>
 
@@ -52,7 +54,11 @@
               Accept Request
             </button>
           </form>
-        <% } else { %>
+
+        <% } else if (
+          request.status !== "completed" &&
+          request.status !== "rejected"
+        ) { %>
           <form
             action="/advisor/requests/<%= request.request_id %>/status"
             method="POST"
@@ -64,10 +70,17 @@
 
               <select id="status" name="status" required>
                 <option
-                  value="in_progress"
-                  <%= request.status === "in_progress" ? "selected" : "" %>
+                  value="reviewing"
+                  <%= request.status === "reviewing" ? "selected" : "" %>
                 >
-                  In Progress
+                  Reviewing
+                </option>
+
+                <option
+                  value="accepted"
+                  <%= request.status === "accepted" ? "selected" : "" %>
+                >
+                  Accepted
                 </option>
 
                 <option
@@ -76,6 +89,13 @@
                 >
                   Completed
                 </option>
+
+                <option
+                  value="rejected"
+                  <%= request.status === "rejected" ? "selected" : "" %>
+                >
+                  Rejected
+                </option>
               </select>
             </div>
 
@@ -83,6 +103,11 @@
               Update Status
             </button>
           </form>
+
+        <% } else { %>
+          <p class="muted-text">
+            This request is closed.
+          </p>
         <% } %>
 
         <a href="/advisor" class="btn btn-secondary">

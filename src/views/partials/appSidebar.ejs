@@ -10,15 +10,14 @@
             <a href="/admin/categories">Categories</a>
             <a href="/admin/requests">Advisor Requests</a>
         <% } else if (user.role === "advisor") { %>
-            <a href="/advisor/index">Dashboard</a>
-            <a href="../advisor/request">Requests</a>
-            <a href="/advisor-requests">Advisor Requests</a>
-            <a href="/advisor/userRequests">Clients</a>
-        <% } else { %>
-            <a href="/dashboard">Dashboard</a>
-            <a href="/transaction">Transactions</a>
-            <a href="/budget">Budgets</a>
-            <a href="/goal">Goals</a>
+            <a href="/advisor">Dashboard</a>
+            <a href="/advisor">Queue</a>
+            <% } else { %>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/transaction">Transactions</a>
+                <a href="/budget">Budgets</a>
+                <a href="/goal">Goals</a>
+                <a href="/advisor-requests">Advisor Requests</a>
             <a href="/reports">Reports</a>
         <% } %>
     </nav>
