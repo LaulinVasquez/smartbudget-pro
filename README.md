@@ -8,6 +8,20 @@ This project is being developed as the final project for CSE 340 Web Backend Dev
 
 ---
 
+## 📸 Application Preview
+
+### Landing Page
+
+![Landing Page](./img/landing.png)
+
+---
+
+### User Dashboard
+
+![Dashboard](./img/dashboard.png)
+
+---
+
 # Features
 
 ## Authentication and Authorization
