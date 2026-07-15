@@ -1,6 +1,6 @@
 import db from "../../database/db.js";
 
-async function getAdmingSummary() {
+async function getAdminSummary() {
     const sql =`
         SELECT
             COUNT(*) FILTER (WHERE role = 'user') AS total_users,
@@ -21,21 +21,21 @@ async function getAllUsersForAdmin() {
             last_name,
             email,
             role,
-            created_at,
+            created_at
         FROM users
         ORDER BY created_at DESC;
     `;
     const { rows } = await db.query(sql);
-    return rows ?? null;
+    return rows;
 }
 
 async function updateUserRole(userId, role) {
     const sql=`
         UPDATE users
         SET
-            role = $1,
+            role = $2,
             updated_at = CURRENT_TIMESTAMP
-        WHERE user_id = $2
+        WHERE user_id = $1
         RETURNING
             user_id,
             first_name,

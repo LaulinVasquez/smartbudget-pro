@@ -1,12 +1,12 @@
 import { createTransaction, getTransactionsByUser, getTransactionById, updateTransaction, deleteTransaction } from "../../models/transaction/transactionModel.js";
-import { getAllcategories } from "../../models/category/categoryModel.js";
+import { getAllCategories } from "../../models/category/categoryModel.js";
 
 async function buildTransactions(req, res, next) {
     try {
         const userId = req.session.user.userId;
 
         const transactions = await getTransactionsByUser(userId);
-        const categories = await getAllcategories();
+        const categories = await getAllCategories();
 
         res.render("transaction/index", {
             title: "Transactions",

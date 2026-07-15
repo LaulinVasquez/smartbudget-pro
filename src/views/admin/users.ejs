@@ -1,0 +1,150 @@
+<%- include("../partials/header") %>
+
+<div class="app">
+  <%- include("../partials/appSidebar") %>
+
+  <div class="app-main">
+    <%- include("../partials/topbar", { pageTitle: "Manage Users" }) %>
+
+    <main class="content">
+      <div class="page-header">
+        <div>
+          <h2>Manage Users</h2>
+          <p>Review registered accounts and update user roles.</p>
+        </div>
+      </div>
+
+      <section class="card">
+        <div class="card-header">
+          <div>
+            <h3>Registered Accounts</h3>
+            <p>
+              Roles determine which sections and actions each account can
+              access.
+            </p>
+          </div>
+
+          <span class="badge">
+            <%= users.length %> accounts
+          </span>
+        </div>
+
+        <% if (users.length === 0) { %>
+          <div class="empty-state">
+            <p>No registered users were found.</p>
+          </div>
+        <% } else { %>
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Email</th>
+                  <th>Current Role</th>
+                  <th>Created</th>
+                  <th>Change Role</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% users.forEach(account => { %>
+                  <tr>
+                    <td>
+                      <strong>
+                        <%= account.first_name %>
+                        <%= account.last_name %>
+                      </strong>
+
+                      <% if (
+                        Number(account.user_id) === Number(user.userId)
+                      ) { %>
+                        <span class="badge badge-reviewing">
+                          You
+                        </span>
+                      <% } %>
+                    </td>
+
+                    <td><%= account.email %></td>
+
+                    <td>
+                      <span class="badge badge-<%= account.role %>">
+                        <%= account.role %>
+                      </span>
+                    </td>
+
+                    <td>
+                      <%= new Date(account.created_at).toLocaleDateString() %>
+                    </td>
+
+                    <td>
+                      <% if (
+                        Number(account.user_id) === Number(user.userId)
+                      ) { %>
+                        <span class="muted-text">
+                          Your own role cannot be changed.
+                        </span>
+                      <% } else { %>
+                        <form
+                          action="/admin/users/<%= account.user_id %>/role"
+                          method="POST"
+                          class="role-form"
+                          novalidate
+                        >
+                          <label
+                            class="visually-hidden"
+                            for="role-<%= account.user_id %>"
+                          >
+                            Role for
+                            <%= account.first_name %>
+                            <%= account.last_name %>
+                          </label>
+
+                          <select
+                            id="role-<%= account.user_id %>"
+                            name="role"
+                            required
+                          >
+                            <option
+                              value="user"
+                              <%= account.role === "user" ? "selected" : "" %>
+                            >
+                              User
+                            </option>
+
+                            <option
+                              value="advisor"
+                              <%= account.role === "advisor" ? "selected" : "" %>
+                            >
+                              Advisor
+                            </option>
+
+                            <option
+                              value="admin"
+                              <%= account.role === "admin" ? "selected" : "" %>
+                            >
+                              Admin
+                            </option>
+                          </select>
+
+                          <button type="submit" class="btn btn-primary">
+                            Save
+                          </button>
+                        </form>
+                      <% } %>
+                    </td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        <% } %>
+      </section>
+
+      <a href="/admin" class="btn btn-secondary">
+        &larr; Back to Admin Dashboard
+      </a>
+    </main>
+  </div>
+</div>
+
+<%- include("../partials/footer") %>

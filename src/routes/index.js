@@ -6,6 +6,7 @@ import transactionRoutes from "./transaction.js";
 import budgetRoutes from "./budget.js";
 import goalRoutes from "./goal.js";
 import advisorRoutes from "./advisor.js";
+import adminRoutes from "./admin.js";
 
 // Create a new router instance
 const router = Router()
@@ -32,6 +33,9 @@ router.use("/", goalRoutes);
 
 // Advisor requests
 router.use("/", advisorRoutes)
+
+// Admin routes
+router.use("/", adminRoutes)
 
 // This a test
 router.get("/errors21", testErrorPage);

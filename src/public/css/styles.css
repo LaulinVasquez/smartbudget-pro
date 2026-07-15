@@ -30,6 +30,7 @@
 
 /* Pages */
 @import url("./pages/dashboard.css") layer(pages);
+@import url("./pages/admin.css") layer(pages);
 @import url("./pages/goals.css") layer(pages);
 @import url("./pages/home.css") layer(pages);
 @import url("./pages/advisor.css") layer(pages);

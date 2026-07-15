@@ -1,11 +1,11 @@
 import { createBudget, getBudgetsByUser, getBudgetById, updateBudget, deleteBudget } from "../../models/budgets/budgetModel.js";
-import { getAllcategories } from "../../models/category/categoryModel.js";
+import { getAllCategories } from "../../models/category/categoryModel.js";
 
 async function buildBudgets(req,res,next) {
     try{
         const userId = req.session.user.userId;
         const budget = await getBudgetsByUser(userId);
-        const categories = await getAllcategories();
+        const categories = await getAllCategories();
 
         return res.render("budget/index", {
             title: "Budgets",

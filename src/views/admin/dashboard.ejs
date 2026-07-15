@@ -1,0 +1,122 @@
+<%- include("../partials/header") %>
+
+<div class="app">
+  <%- include("../partials/appSidebar") %>
+
+  <div class="app-main">
+    <%- include("../partials/topbar", { pageTitle: "Admin Dashboard" }) %>
+
+    <main class="content">
+
+      <div class="page-header">
+        <div>
+          <h2>Administrator Dashboard</h2>
+          <p>
+            Manage users, categories, and monitor the overall SmartBudget Pro
+            system.
+          </p>
+        </div>
+      </div>
+
+      <section class="stat-grid">
+
+        <article class="stat-card">
+          <p class="stat-title">Total Accounts</p>
+
+          <div class="stat-value">
+            <%= summary.total_accounts %>
+          </div>
+
+          <p class="stat-footer">
+            Registered accounts
+          </p>
+        </article>
+
+        <article class="stat-card">
+          <p class="stat-title">Users</p>
+
+          <div class="stat-value">
+            <%= summary.total_users %>
+          </div>
+
+          <p class="stat-footer">
+            Standard users
+          </p>
+        </article>
+
+        <article class="stat-card">
+          <p class="stat-title">Advisors</p>
+
+          <div class="stat-value">
+            <%= summary.total_advisors %>
+          </div>
+
+          <p class="stat-footer">
+            Financial advisors
+          </p>
+        </article>
+
+        <article class="stat-card">
+          <p class="stat-title">Categories</p>
+
+          <div class="stat-value">
+            <%= summary.total_categories %>
+          </div>
+
+          <p class="stat-footer">
+            Transaction categories
+          </p>
+        </article>
+
+        <article class="stat-card">
+          <p class="stat-title">Advisor Requests</p>
+
+          <div class="stat-value">
+            <%= summary.total_requests %>
+          </div>
+
+          <p class="stat-footer">
+            Total requests submitted
+          </p>
+        </article>
+
+      </section>
+
+      <section class="card">
+
+        <div class="card-header">
+          <div>
+            <h3>Quick Actions</h3>
+            <p>
+              Manage application resources.
+            </p>
+          </div>
+        </div>
+
+        <div class="action-grid">
+
+          <a href="/admin/users" class="action-card">
+            <h3>Users</h3>
+
+            <p>
+              View users and update roles.
+            </p>
+          </a>
+
+          <a href="/admin/categories" class="action-card">
+            <h3>Categories</h3>
+
+            <p>
+              Create and manage transaction categories.
+            </p>
+          </a>
+
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<%- include("../partials/footer") %>
