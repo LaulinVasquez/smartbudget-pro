@@ -1,0 +1,64 @@
+<%- include("../partials/header") %>
+
+<div class="app">
+  <%- include("../partials/appSidebar") %>
+
+  <div class="app-main">
+    <%- include("../partials/topbar", { pageTitle: "Edit Category" }) %>
+
+    <main class="content">
+      <section class="card">
+        <div class="card-header">
+          <div>
+            <h2>Edit Category</h2>
+            <p>Update this category’s name or description.</p>
+          </div>
+        </div>
+
+        <form
+          action="/admin/categories/<%= category.category_id %>/edit"
+          method="POST"
+          class="form-grid"
+          novalidate
+        >
+          <div class="form-group">
+            <label for="name">Category Name</label>
+
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value="<%= category.name %>"
+              minlength="2"
+              maxlength="100"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+
+            <textarea
+              id="description"
+              name="description"
+              maxlength="500"
+              rows="5"
+            ><%= category.description || "" %></textarea>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn btn-primary">
+              Save Changes
+            </button>
+
+            <a href="/admin/categories" class="btn btn-secondary">
+              Cancel
+            </a>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+</div>
+
+<%- include("../partials/footer") %>

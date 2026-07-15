@@ -1,0 +1,110 @@
+<%- include("../partials/header") %>
+
+<div class="app">
+  <%- include("../partials/appSidebar") %>
+
+  <div class="app-main">
+    <%- include("../partials/topbar", { pageTitle: "Manage Categories" }) %>
+
+    <main class="content">
+      <div class="page-header">
+        <div>
+          <h2>Manage Categories</h2>
+          <p>Create and maintain categories used by transactions and budgets.</p>
+        </div>
+      </div>
+
+      <section class="card">
+        <div class="card-header">
+          <div>
+            <h3>Create Category</h3>
+            <p>Add a new category for users to organize their finances.</p>
+          </div>
+        </div>
+
+        <form action="/admin/categories" method="POST" class="form-grid" novalidate>
+          <div class="form-group">
+            <label for="name">Category Name</label>
+
+            <input type="text" id="name" name="name" minlength="2" maxlength="100" required>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+
+            <textarea id="description" name="description" maxlength="500" rows="4"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            Create Category
+          </button>
+        </form>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <div>
+            <h3>Existing Categories</h3>
+            <p>Review, edit, or remove transaction categories.</p>
+          </div>
+
+          <span class="badge">
+            <%= categories.length %> categories
+          </span>
+        </div>
+
+        <% if (categories.length === 0) { %>
+        <div class="empty-state">
+          <p>No categories have been created yet.</p>
+        </div>
+        <% } else { %>
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% categories.forEach(category => { %>
+              <tr>
+                <td>
+                  <strong><%= category.name %></strong>
+                </td>
+
+                <td>
+                  <%= category.description || "No description" %>
+                </td>
+
+                <td>
+                  <div class="actions">
+                    <a href="/admin/categories/<%= category.category_id %>/edit" class="btn btn-secondary">
+                      Edit
+                    </a>
+
+                    <form action="/admin/categories/<%= category.category_id %>/delete" method="POST" class="inline-form">
+                      <button type="submit" class="btn btn-danger">
+                        Delete
+                      </button>
+                    </form>
+                  </div>
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+        <% } %>
+      </section>
+
+      <a href="/admin" class="btn btn-secondary">
+        &larr; Back to Admin Dashboard
+      </a>
+    </main>
+  </div>
+</div>
+
+<%- include("../partials/footer") %>
