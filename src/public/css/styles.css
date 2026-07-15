@@ -17,6 +17,7 @@
 @import url("./layout/header.css") layer(layout);
 @import url("./layout/sidebar.css") layer(layout);
 @import url("./layout/topbar.css") layer(layout);
+@import url("./layout/footer.css") layer(layout);
 
 /* Components */
 @import url("./components/flash.css") layer(components);
@@ -26,8 +27,6 @@
 @import url("./components/forms.css") layer(components);
 @import url("./components/cards.css") layer(components);
 
-
-
 /* Pages */
 @import url("./pages/dashboard.css") layer(pages);
 @import url("./pages/admin.css") layer(pages);
@@ -36,6 +35,7 @@
 @import url("./pages/advisor.css") layer(pages);
 @import url("./pages/transactions.css")layer(pages);
 @import url("./pages/auth.css") layer(pages);
+@import url("./pages/about.css") layer(pages);
 @import url("./pages/errors.css") layer(pages);
 
 /* Utilities */

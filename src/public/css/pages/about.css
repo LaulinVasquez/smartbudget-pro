@@ -1,0 +1,130 @@
+.about-page {
+  width: 100%;
+  max-width: none;
+  padding: 0;
+}
+
+.about-hero {
+  width: min(100% - 2rem, 950px);
+  margin-inline: auto;
+  padding-block: 6rem;
+  text-align: center;
+}
+
+.about-hero h1 {
+  margin-bottom: var(--space-5);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  letter-spacing: -0.04em;
+}
+
+.about-hero p {
+  max-width: 720px;
+  margin-inline: auto;
+  font-size: var(--text-lg);
+}
+
+.about-section {
+  padding-block: 5rem;
+  background: var(--card);
+  border-block: 1px solid var(--border);
+}
+
+.about-section-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+  align-items: center;
+  gap: var(--space-10);
+
+  width: min(100% - 2rem, 1200px);
+  margin-inline: auto;
+}
+
+.about-section-content h2,
+.about-technology h2 {
+  margin-bottom: var(--space-4);
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.about-section-content p + p {
+  margin-top: var(--space-4);
+}
+
+.about-highlight-card {
+  display: grid;
+  gap: var(--space-3);
+
+  padding: var(--space-8);
+
+  background: var(--foreground);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.about-highlight-card strong {
+  color: var(--primary);
+  font-size: var(--text-3xl);
+}
+
+.about-highlight-card span {
+  color: #cbd5e1;
+  font-size: var(--text-lg);
+}
+
+.about-features {
+  padding-block: 5rem;
+}
+
+.about-technology {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+  align-items: center;
+  gap: var(--space-8);
+
+  width: min(100% - 2rem, 1200px);
+  margin-inline: auto;
+  padding-block: 5rem;
+
+  border-top: 1px solid var(--border);
+}
+
+.technology-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.technology-list span {
+  padding: var(--space-3) var(--space-4);
+
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+
+  color: var(--secondary-foreground);
+  font-weight: 600;
+}
+
+.about-cta {
+  margin-top: 0;
+}
+
+@media (max-width: 850px) {
+  .about-section-content,
+  .about-technology {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-hero {
+    padding-block: 4rem;
+  }
+
+  .about-hero p {
+    font-size: var(--text-base);
+  }
+
+  .about-highlight-card {
+    padding: var(--space-6);
+  }
+}

@@ -1,7 +1,61 @@
-<hr>
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo">
+        SmartBudget Pro
+      </a>
 
-<footer>
-    <p>&copy; <%= new Date().getFullYear() %> SmartBudget Pro</p>
+      <p>
+        Simple tools to help you track spending, manage budgets, and reach your financial goals.
+      </p>
+    </div>
+
+    <div class="footer-links">
+      <div>
+        <h2>Product</h2>
+
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+
+        <% if (!isLoggedIn) { %>
+          <a href="/register">Create Account</a>
+          <a href="/login">Log In</a>
+        <% } else if (user.role === "user") { %>
+          <a href="/dashboard">Dashboard</a>
+          <a href="/transaction">Transactions</a>
+          <a href="/budget">Budgets</a>
+          <a href="/goal">Goals</a>
+        <% } else if (user.role === "advisor") { %>
+          <a href="/advisor">Advisor Dashboard</a>
+        <% } else if (user.role === "admin") { %>
+          <a href="/admin">Admin Dashboard</a>
+        <% } %>
+      </div>
+
+      <div>
+        <h2>Support</h2>
+
+        <a href="/about">How It Works</a>
+
+        <% if (isLoggedIn && user.role === "user") { %>
+          <a href="/advisor-requests">Advisor Requests</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>
+      &copy; <%= new Date().getFullYear() %> SmartBudget Pro. All rights reserved.
+    </p>
+
+    <p>
+      Built by Laurin Vasquez
+    </p>
+  </div>
+
+  <%- renderScripts() %>
 </footer>
+
 </body>
 </html>

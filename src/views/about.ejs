@@ -1,12 +1,150 @@
 <%- include("partials/header") %>
 <%- include("partials/nav") %>
 
-<main>
-    <h2>About SmartBudget Pro</h2>
+<main class="about-page">
+  <section class="about-hero">
+    <span class="section-label">About SmartBudget Pro</span>
+
+    <h1>
+      Personal finance tools designed to make money management simpler.
+    </h1>
 
     <p>
-        SmartBudget Pro helps users track expenses,
-        budgets, and financial goals.
+      SmartBudget Pro helps users understand their financial activity, create better spending habits, and make progress toward important savings goals.
     </p>
+  </section>
+
+  <section class="about-section">
+    <div class="about-section-content">
+      <div>
+        <span class="section-label">The purpose</span>
+
+        <h2>Why SmartBudget Pro was created</h2>
+
+        <p>
+          Managing money can feel overwhelming when transactions, budgets, and goals are stored in different places. SmartBudget Pro brings those tools together in one organized application.
+        </p>
+
+        <p>
+          Users can record income and expenses, create monthly budgets, track savings goals, and request guidance from a financial advisor.
+        </p>
+      </div>
+
+      <div class="about-highlight-card">
+        <strong>One application</strong>
+        <span>for transactions, budgets, goals, and financial guidance.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-features" aria-labelledby="about-features-title">
+    <div class="section-heading">
+      <span class="section-label">Core features</span>
+
+      <h2 id="about-features-title">
+        Built around practical financial needs
+      </h2>
+    </div>
+
+    <div class="feature-grid">
+      <article class="feature-card">
+        <div class="feature-icon">$</div>
+        <h3>Transaction Tracking</h3>
+        <p>
+          Record income and expenses and organize each transaction by category.
+        </p>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-icon">%</div>
+        <h3>Monthly Budgets</h3>
+        <p>
+          Set category-based spending limits and monitor how much has been used.
+        </p>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-icon">✓</div>
+        <h3>Savings Goals</h3>
+        <p>
+          Create financial goals, add contributions, and track progress visually.
+        </p>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-icon">A</div>
+        <h3>Advisor Support</h3>
+        <p>
+          Submit financial questions and track requests through the advisor workflow.
+        </p>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-icon">R</div>
+        <h3>Role-Based Access</h3>
+        <p>
+          Users, advisors, and administrators each receive tools designed for their responsibilities.
+        </p>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-icon">D</div>
+        <h3>Financial Dashboard</h3>
+        <p>
+          View balances, income, expenses, budget progress, and recent activity in one place.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="about-technology">
+    <div>
+      <span class="section-label">Technology</span>
+
+      <h2>Built as a full-stack web application</h2>
+
+      <p>
+        SmartBudget Pro uses Node.js, Express, EJS, PostgreSQL, secure sessions, password hashing, validation, and role-based authorization.
+      </p>
+    </div>
+
+    <div class="technology-list">
+      <span>Node.js</span>
+      <span>Express</span>
+      <span>EJS</span>
+      <span>PostgreSQL</span>
+      <span>bcrypt</span>
+      <span>Express Validator</span>
+    </div>
+  </section>
+
+  <section class="landing-cta about-cta">
+    <div>
+      <h2>Start building better financial habits</h2>
+
+      <p>
+        Create an account and begin tracking your finances with SmartBudget Pro.
+      </p>
+    </div>
+
+    <% if (!isLoggedIn) { %>
+      <a href="/register" class="btn btn-primary">
+        Create Account
+      </a>
+    <% } else if (user.role === "user") { %>
+      <a href="/dashboard" class="btn btn-primary">
+        Open Dashboard
+      </a>
+    <% } else if (user.role === "advisor") { %>
+      <a href="/advisor" class="btn btn-primary">
+        Open Advisor Dashboard
+      </a>
+    <% } else { %>
+      <a href="/admin" class="btn btn-primary">
+        Open Admin Dashboard
+      </a>
+    <% } %>
+  </section>
 </main>
+
 <%- include("partials/footer") %>
