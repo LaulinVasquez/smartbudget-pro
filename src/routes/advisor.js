@@ -4,7 +4,7 @@ import { requireLogin, requireRole } from "../middleware/auth/auth.js";
 import advisorRequestValidation from "../middleware/validation/advisorRequestValidation.js";
 import validate from "../middleware/validation/validate.js";
 
-import { buildUserAdvisorRequests, submitAdvisorRequest, removeAdvisorRequest, buildAdvisorRequests, buildAdvisorRequestDetails, acceptAdvisorRequest, changeAdvisorRequestStatus, } from "../controllers/advisor/advisorRequestController.js";
+import { buildUserAdvisorRequests, submitAdvisorRequest, removeAdvisorRequest, buildAdvisorRequests, buildAdvisorRequestDetails, acceptAdvisorRequest, changeAdvisorRequestStatus, } from "../controllers/advisor/advisorController.js";
 
 const router = Router();
 
