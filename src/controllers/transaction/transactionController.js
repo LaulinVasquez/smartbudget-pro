@@ -42,7 +42,7 @@ async function buildEditTransaction(req, res, next) {
         const userId = req.session.user.userId;
         const transactionId = req.params.transactionId;
         const transaction = await getTransactionById(transactionId, userId);
-        const categories = await getAllcategories();
+        const categories = await getAllCategories();
 
         if (!transaction) {
             req.flash("error", "Transaction not found.");
